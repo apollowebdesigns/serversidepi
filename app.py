@@ -2,16 +2,48 @@ import gevent
 import gevent.monkey
 from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
+from nanpy import (ArduinoApi, SerialManager)
+from time import sleep
 
 from flask import Flask, request, Response, render_template
 
 app = Flask(__name__)
 
+Motor1A = 2
+Motor1B = 3
+#Motor1E = 7
+ 
+Motor2A = 4
+Motor2B = 5
+#Motor2E = 10
+
+# Connecting to the Arduino
+
+try:
+    connection = SerialManager()
+    arduino = ArduinoApi(connection = connection)
+except:
+    print("Failed to connect to the arduino")
+
+arduino.pinMode(Motor1A,arduino.OUTPUT)
+arduino.pinMode(Motor1B,arduino.OUTPUT)
+
+arduino.pinMode(Motor2A,arduino.OUTPUT)
+arduino.pinMode(Motor2B,arduino.OUTPUT)
+
 def event_stream():
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
     count = 0
     while True:
-        gevent.sleep(0.1)
+        gevent.sleep(0.01)
+        arduino.digitalWrite(Motor1A,arduino.HIGH)
+        arduino.digitalWrite(Motor1B,arduino.LOW)
         yield 'data: %s\n\n' % count
+        arduino.digitalWrite(Motor2A,arduino.HIGH)
+        arduino.digitalWrite(Motor2B,arduino.LOW)
         count += 1
 
 def event_end():
@@ -29,9 +61,11 @@ def sse_request():
 
 @app.route('/end_motor_source')
 def event_end():
-    #kill gipo
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
     print('entered!!')
-
     return 'end'
 
 @app.route('/')
