@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(
+                    function() {
+                        var sse;
+
+                        $('#event').mousedown(function(){
+                            sse = new EventSource('/my_event_source');
+                            sse.onmessage = function(message) {
+                                console.log('A message has arrived!');
+                                $('#output').append('<li>'+message.data+'</li>');
+                            }
+                        })
+
+                        $('#event').mouseup(function(){
+                            sse.close();
+                        })
+                    })
+
+        </script>
+    </head>
+
+    <body class="container">
+
+        <h2 class="heading">Demo</h2>
+        <button class="btn waves-effect waves-light" id="event">event button</button>
+
+        <ul id="output">
+
+        </ul>
+
+    </body>
+
+</html>
