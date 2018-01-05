@@ -14,11 +14,25 @@ def event_stream():
         yield 'data: %s\n\n' % count
         count += 1
 
+def event_end():
+    count = 0
+    while True:
+        gevent.sleep(0.1);
+        yield 'data: %s\n\n' % count
+        count = 0
+
 @app.route('/my_event_source')
 def sse_request():
     return Response(
             event_stream(),
             mimetype='text/event-stream')
+
+@app.route('/end_motor_source')
+def event_end():
+    #kill gipo
+    print('entered!!')
+
+    return 'end'
 
 @app.route('/')
 def page():

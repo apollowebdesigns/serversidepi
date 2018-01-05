@@ -7,18 +7,20 @@
         <script type="text/javascript">
             $(document).ready(
                     function() {
-                        var sse;
+                        var sse, sse1;
 
-                        $('#event').mousedown(function(){
+                        $('#event').mouseup(function(){
+                            sse.close();
+                            $.get( "/end_motor_source", function(data) {
+                                console.log('ending');
+                                $( ".result" ).html( data );
+                            });
+                        }).mousedown(function(){
                             sse = new EventSource('/my_event_source');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
                                 $('#output').append('<li>'+message.data+'</li>');
                             }
-                        })
-
-                        $('#event').mouseup(function(){
-                            sse.close();
                         })
                     })
 
