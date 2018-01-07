@@ -65,6 +65,12 @@ def sse_request():
 
 @app.route('/end_motor_source')
 def event_end():
+    arduino.pinMode(Motor1A,arduino.OUTPUT)
+    arduino.pinMode(Motor1B,arduino.OUTPUT)
+
+    arduino.pinMode(Motor2A,arduino.OUTPUT)
+    arduino.pinMode(Motor2B,arduino.OUTPUT)
+
     arduino.digitalWrite(Motor1A,arduino.LOW)
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
