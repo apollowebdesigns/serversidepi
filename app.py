@@ -11,11 +11,9 @@ app = Flask(__name__)
 
 Motor1A = 2
 Motor1B = 3
-#Motor1E = 7
  
 Motor2A = 4
 Motor2B = 5
-#Motor2E = 10
 
 # Connecting to the Arduino
 
@@ -30,6 +28,12 @@ arduino.pinMode(Motor1B,arduino.OUTPUT)
 
 arduino.pinMode(Motor2A,arduino.OUTPUT)
 arduino.pinMode(Motor2B,arduino.OUTPUT)
+
+def kill_motors():
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
 
 def event_stream():
     arduino.digitalWrite(Motor1A,arduino.LOW)
@@ -65,6 +69,7 @@ def event_end():
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
+    kill_motors()
     print('entered!!')
     return 'end'
 

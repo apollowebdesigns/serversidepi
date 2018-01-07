@@ -5,6 +5,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="//code.jquery.com/jquery-1.8.0.min.js"></script>
         <script type="text/javascript">
+
+            function killRequest() {
+                return $.get( "/end_motor_source", function(data) {
+                                console.log('ending');
+                                $( ".result" ).html( data );
+                            });
+            }
+
             $(document).ready(
                     function() {
                         var sse, sse1;
@@ -15,6 +23,7 @@
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
+                            return killRequest();
                         }).mousedown(function(){
                             sse = new EventSource('/my_event_source');
                             sse.onmessage = function(message) {
