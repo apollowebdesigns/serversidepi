@@ -70,6 +70,21 @@ def move_right():
     count = 0
     while True:
         gevent.sleep(0.01)
+        arduino.digitalWrite(Motor1A,arduino.LOW)
+        arduino.digitalWrite(Motor1B,arduino.HIGH)
+        arduino.digitalWrite(Motor2A,arduino.HIGH)
+        arduino.digitalWrite(Motor2B,arduino.LOW)
+        yield 'data: %s\n\n' % count
+        count += 1
+
+def move_left():
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
+    count = 0
+    while True:
+        gevent.sleep(0.01)
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.LOW)
@@ -100,6 +115,12 @@ def sse_backwards():
 def sse_right():
     return Response(
             move_right(),
+            mimetype='text/event-stream')
+
+@app.route('/left')
+def sse_left():
+    return Response(
+            move_left(),
             mimetype='text/event-stream')
 
 @app.route('/end_motor_source')

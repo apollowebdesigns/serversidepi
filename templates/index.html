@@ -60,6 +60,21 @@
                                 $('#output').append('<li>'+message.data+'</li>');
                             }
                         })
+
+                        $('#left').mouseup(function(){
+                            sse.close();
+                            $.get( "/end_motor_source", function(data) {
+                                console.log('ending');
+                                $( ".result" ).html( data );
+                            });
+                            return killRequest();
+                        }).mousedown(function(){
+                            sse = new EventSource('/left');
+                            sse.onmessage = function(message) {
+                                console.log('A message has arrived!');
+                                $('#output').append('<li>'+message.data+'</li>');
+                            }
+                        })
                     })
 
         </script>
@@ -71,6 +86,7 @@
         <button class="btn waves-effect waves-light" id="forwards">Forwards</button>
         <button class="btn waves-effect waves-light" id="backwards">Backwards</button>
         <button class="btn waves-effect waves-light" id="right">Right</button>
+        <button class="btn waves-effect waves-light" id="left">Left</button>
 
         <ul id="output">
 
