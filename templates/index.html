@@ -16,8 +16,7 @@
             $(document).ready(
                     function() {
                         var sse, sse1;
-
-                        $('#event').mouseup(function(){
+                        $('#forwards').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
@@ -31,6 +30,21 @@
                                 $('#output').append('<li>'+message.data+'</li>');
                             }
                         })
+
+                        $('#backwards').mouseup(function(){
+                            sse.close();
+                            $.get( "/end_motor_source", function(data) {
+                                console.log('ending');
+                                $( ".result" ).html( data );
+                            });
+                            return killRequest();
+                        }).mousedown(function(){
+                            sse = new EventSource('/backwards');
+                            sse.onmessage = function(message) {
+                                console.log('A message has arrived!');
+                                $('#output').append('<li>'+message.data+'</li>');
+                            }
+                        })
                     })
 
         </script>
@@ -39,7 +53,8 @@
     <body class="container">
 
         <h2 class="heading">Demo</h2>
-        <button class="btn waves-effect waves-light" id="event">event button</button>
+        <button class="btn waves-effect waves-light" id="forwards">Forwards</button>
+        <button class="btn waves-effect waves-light" id="backwards">Backwards</button>
 
         <ul id="output">
 

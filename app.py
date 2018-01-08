@@ -47,6 +47,21 @@ def event_stream():
         yield 'data: %s\n\n' % count
         count += 1
 
+def move_backwards():
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
+    count = 0
+    while True:
+        gevent.sleep(0.01)
+        arduino.digitalWrite(Motor1A,arduino.LOW)
+        arduino.digitalWrite(Motor1B,arduino.HIGH)
+        arduino.digitalWrite(Motor2A,arduino.LOW)
+        arduino.digitalWrite(Motor2B,arduino.HIGH)
+        yield 'data: %s\n\n' % count
+        count += 1
+
 def event_end():
     count = 0
     while True:
@@ -60,11 +75,16 @@ def sse_request():
             event_stream(),
             mimetype='text/event-stream')
 
+@app.route('/backwards')
+def sse_request():
+    return Response(
+            move_backwards(),
+            mimetype='text/event-stream')
+
 @app.route('/end_motor_source')
 def event_end():
     arduino.pinMode(Motor1A,arduino.OUTPUT)
     arduino.pinMode(Motor1B,arduino.OUTPUT)
-
     arduino.pinMode(Motor2A,arduino.OUTPUT)
     arduino.pinMode(Motor2B,arduino.OUTPUT)
 
