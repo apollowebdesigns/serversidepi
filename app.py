@@ -4,28 +4,25 @@ from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
-
 from flask import Flask, request, Response, render_template
 
 app = Flask(__name__)
 
 Motor1A = 2
 Motor1B = 3
- 
 Motor2A = 4
 Motor2B = 5
 
 # Connecting to the Arduino
-
 try:
     connection = SerialManager()
     arduino = ArduinoApi(connection = connection)
 except:
     print("Failed to connect to the arduino")
 
+# Motors set up
 arduino.pinMode(Motor1A,arduino.OUTPUT)
 arduino.pinMode(Motor1B,arduino.OUTPUT)
-
 arduino.pinMode(Motor2A,arduino.OUTPUT)
 arduino.pinMode(Motor2B,arduino.OUTPUT)
 
