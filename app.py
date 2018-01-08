@@ -45,9 +45,9 @@ def event_stream():
         gevent.sleep(0.01)
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
-        yield 'data: %s\n\n' % count
         arduino.digitalWrite(Motor2A,arduino.HIGH)
         arduino.digitalWrite(Motor2B,arduino.LOW)
+        yield 'data: %s\n\n' % count
         count += 1
 
 def event_end():
