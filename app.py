@@ -143,5 +143,5 @@ def page():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    http_server = WSGIServer(('0.0.0.0', 8001), app)
+    http_server = WSGIServer(('0.0.0.0', 80), app)
     http_server.serve_forever()
