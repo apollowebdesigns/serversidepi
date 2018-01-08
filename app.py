@@ -76,7 +76,7 @@ def sse_request():
             mimetype='text/event-stream')
 
 @app.route('/backwards')
-def sse_request():
+def sse_backwards():
     return Response(
             move_backwards(),
             mimetype='text/event-stream')
