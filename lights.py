@@ -1,7 +1,6 @@
 from sense_hat import SenseHat
 sense = SenseHat()
 sense.clear()
-sense.set_rotation(90)
 
 while True:
     o = sense.get_orientation()
@@ -17,3 +16,4 @@ while True:
         sense.set_pixel(2, 6, (255, 0, 0))
         sense.set_pixel(3, 6, (255, 0, 0))
         sense.set_pixel(4, 6, (255, 0, 0))
+        sense.set_pixel(5, 5, (255, 0, 0))
