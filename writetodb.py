@@ -1,4 +1,5 @@
 from sense_hat import SenseHat
+import pymysql.cursors
 
 sense = SenseHat()
 sense.clear()
@@ -9,7 +10,6 @@ except Exception:
     print('error getting sensehat temperature')
 string_temp = str(temp)
  
-import pymysql.cursors
 
 # Connect to the database
 connection = pymysql.connect(host='localhost',
@@ -23,7 +23,7 @@ try:
     with connection.cursor() as cursor:
         # Create a new record
         sql = "INSERT INTO `temperature` (`temperature`) VALUES (%s)"
-        cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
+        cursor.execute(sql, (temp))
 
     # connection is not autocommit by default. So you must commit to save
     # your changes.
