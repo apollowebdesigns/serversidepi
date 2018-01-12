@@ -8,3 +8,7 @@ use command
 <code>mysql -p -u root</code>
 
 and then type in the desired password
+
+### Mock databases
+
+weather
