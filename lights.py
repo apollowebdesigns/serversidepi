@@ -1,6 +1,7 @@
 from sense_hat import SenseHat
 sense = SenseHat()
 sense.clear()
+count = 0
 
 while True:
     o = sense.get_orientation()
@@ -8,7 +9,6 @@ while True:
     roll = o["roll"]
     yaw = o["yaw"]
     print("pitch {0} roll {1} yaw {2}".format(pitch, roll, yaw))
-    count = 0
     if pitch > 300:
         if count % 2 == 0:
             sense.set_pixel(2, 2, (0, 0, 0))
