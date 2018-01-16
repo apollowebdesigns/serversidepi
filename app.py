@@ -98,8 +98,6 @@ def move_left():
         count += 1
 
 def event_end():
-    sense = SenseHat()
-    sense.clear()
     count = 0
     while True:
         gevent.sleep(0.1);
@@ -142,6 +140,8 @@ def event_end():
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
     kill_motors()
+    sense = SenseHat()
+    sense.clear()
     print('entered!!')
     return 'end'
 
