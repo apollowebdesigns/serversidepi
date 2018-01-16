@@ -5,6 +5,9 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from flask import Flask, request, Response, render_template
+from sense_hat import SenseHat
+import forwardsarrow
+import backwardsarrow
 
 app = Flask(__name__)
 
@@ -37,6 +40,7 @@ def event_stream():
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
+    forwardsarrow.forwards()
     count = 0
     while True:
         gevent.sleep(0.01)
@@ -52,6 +56,7 @@ def move_backwards():
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
+    backwardsarrow.backwards()
     count = 0
     while True:
         gevent.sleep(0.01)
@@ -93,6 +98,8 @@ def move_left():
         count += 1
 
 def event_end():
+    sense = SenseHat()
+    sense.clear()
     count = 0
     while True:
         gevent.sleep(0.1);
