@@ -12,3 +12,7 @@ and then type in the desired password
 ### Mock databases
 
 weather
+
+## Database readme info
+
+https://github.com/PyMySQL/PyMySQL this is your bible!!!
