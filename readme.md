@@ -16,3 +16,9 @@ weather
 ## Database readme info
 
 https://github.com/PyMySQL/PyMySQL this is your bible!!!
+
+## SQL used to create database
+
+<code>
+create table data (date varchar(20), temperature varchar(20), pressure varchar(20), humidity varchar(20));
+</code>
