@@ -30,7 +30,7 @@ try:
     with connection.cursor() as cursor:
         # Create a new record
         sql = "INSERT INTO `data` (`date`, `temperature`, `pressure`, `humidity`) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, ('webmaster@python.org', 'very-secret', 'webmaster@python.org', 'very-secret'))
+        cursor.execute(sql, (string_datetimenow, string_temp, string_pressure, string_humidity))
 
     # connection is not autocommit by default. So you must commit to save
     # your changes.
