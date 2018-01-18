@@ -6,10 +6,15 @@ sense.clear()
 
 try:
     temp = sense.get_temperature()
+    pressure = sense.get_pressure()
+    humidity = sense.get_humidity()
 except Exception:
     print('error getting sensehat temperature')
+
+# Getting data values
 string_temp = str(temp)
- 
+string_pressure = str(pressure)
+string_humidity = str(humidity)
 
 # Connect to the database
 connection = pymysql.connect(host='localhost',
