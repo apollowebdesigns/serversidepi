@@ -1,5 +1,6 @@
 from sense_hat import SenseHat
 import pymysql.cursors
+import datetime
 
 sense = SenseHat()
 sense.clear()
@@ -12,6 +13,7 @@ except Exception:
     print('error getting sensehat temperature')
 
 # Getting data values
+string_datetimenow = str(datetime.datetime.now().isoformat())
 string_temp = str(temp)
 string_pressure = str(pressure)
 string_humidity = str(humidity)
@@ -27,7 +29,7 @@ connection = pymysql.connect(host='localhost',
 try:
     with connection.cursor() as cursor:
         # Create a new record
-        sql = "INSERT INTO `temperature` (`temperature`) VALUES (%s)"
+        sql = "INSERT INTO `string_datetimenow` (`temperature`) (`temperature`) (`pressure`) (`humidity`) VALUES (%s) (%s) (%s) (%s)"
         cursor.execute(sql, (temp))
 
     # connection is not autocommit by default. So you must commit to save
