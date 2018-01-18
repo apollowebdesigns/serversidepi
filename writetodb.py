@@ -29,7 +29,7 @@ connection = pymysql.connect(host='localhost',
 try:
     with connection.cursor() as cursor:
         # Create a new record
-        sql = "use weather; insert into data values ('string_datetimenow');"
+        sql = "use weather; insert into data values ('ijeoirwj', 'jerjow', 'dhfiuwheir', 'ejrhwke');"
         cursor.execute(sql)
 
     # connection is not autocommit by default. So you must commit to save
