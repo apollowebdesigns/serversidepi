@@ -4,7 +4,7 @@ import PyMySQL
 print('logging into database')
 try:
     db = PyMySQL.connect("localhost","root","raspberry","weather" )
-raise Exception:
+except Exception:
     print('error connecting to database')
 
 # prepare a cursor object using cursor() method
