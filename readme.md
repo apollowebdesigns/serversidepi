@@ -22,3 +22,7 @@ https://github.com/PyMySQL/PyMySQL this is your bible!!!
 <code>
 create table data (date varchar(20), temperature varchar(20), pressure varchar(20), humidity varchar(20));
 </code>
+
+## Database more info
+
+http://pymysql.readthedocs.io/en/latest/user/examples.html
