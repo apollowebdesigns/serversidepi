@@ -5,11 +5,15 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from flask import Flask, request, Response, render_template
+from flask_cors import CORS
 from sense_hat import SenseHat
 import forwardsarrow
 import backwardsarrow
 
 app = Flask(__name__)
+
+# Allow CORS for client to access server sent events
+CORS(app)
 
 Motor1A = 2
 Motor1B = 3
