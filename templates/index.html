@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="//code.jquery.com/jquery-1.8.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+        
         <script type="text/javascript">
 
             function killRequest() {
@@ -33,14 +33,14 @@
             $(document).ready(
                     function() {
                         var sse, sse1;
-                        $('#forwards').on('vmmouseup', function(){
+                        $('#forwards').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).on('vmousedown', function(){
+                        }).mousedown(function(){
                             sse = new EventSource('/my_event_source');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
@@ -48,14 +48,14 @@
                             }
                         })
 
-                        $('#backwards').on('vmmouseup', function(){
+                        $('#backwards').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).on('vmousedown', function(){
+                        }).mousedown(function(){
                             sse = new EventSource('/backwards');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
@@ -63,14 +63,14 @@
                             }
                         })
 
-                        $('#right').on('vmmouseup', function(){
+                        $('#right').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).on('vmousedown', function(){
+                        }).mousedown(function(){
                             sse = new EventSource('/right');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
@@ -78,14 +78,14 @@
                             }
                         })
 
-                        $('#left').on('vmmouseup', function(){
+                        $('#left').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).on('vmousedown', function(){
+                        }).mousedown(function(){
                             sse = new EventSource('/left');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
