@@ -33,14 +33,14 @@
             $(document).ready(
                     function() {
                         var sse, sse1;
-                        $('#forwards').vmmouseup(function(){
+                        $('#forwards').on('vmmouseup', function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).vmousedown(function(){
+                        }).on('vmousedown', function(){
                             sse = new EventSource('/my_event_source');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
@@ -48,14 +48,14 @@
                             }
                         })
 
-                        $('#backwards').vmmouseup(function(){
+                        $('#backwards').on('vmmouseup', function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).vmousedown(function(){
+                        }).on('vmousedown', function(){
                             sse = new EventSource('/backwards');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
@@ -63,14 +63,14 @@
                             }
                         })
 
-                        $('#right').vmmouseup(function(){
+                        $('#right').on('vmmouseup', function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).vmousedown(function(){
+                        }).on('vmousedown', function(){
                             sse = new EventSource('/right');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
@@ -78,14 +78,14 @@
                             }
                         })
 
-                        $('#left').vmmouseup(function(){
+                        $('#left').on('vmmouseup', function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
                                 console.log('ending');
                                 $( ".result" ).html( data );
                             });
                             return killRequest();
-                        }).vmousedown(function(){
+                        }).on('vmousedown', function(){
                             sse = new EventSource('/left');
                             sse.onmessage = function(message) {
                                 console.log('A message has arrived!');
