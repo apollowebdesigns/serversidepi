@@ -34,11 +34,21 @@
                     function() {
                         var sse, sse1;
 
-                        sse = new EventSource('/distance');
-                        sse.onmessage = function(message) {
-                            console.log('finding that distance');
-                            $('#distance').append('<li>'+message.data+'</li>');
-                        }
+                        $('#dist').mouseup(function(){
+                            sse.close();
+                            $.get( "/end_motor_source", function(data) {
+                                console.log('ending');
+                                $( ".result" ).html( data );
+                            });
+                            return killRequest();
+                        }).mousedown(function(){
+                            sse = new EventSource('/distance');
+                            sse.onmessage = function(message) {
+                                console.log('finding that distance');
+                                console.log(message);
+                                $('#distance').append('<li>'+message.data+'</li>');
+                            }
+                        })
 
                         $('#forwards').mouseup(function(){
                             sse.close();
@@ -190,6 +200,7 @@
         </div>
         <div class="row">
             <div class="col s6">
+                <button id="distance">Find distance</button>
                 <ul id="distance">
 
                 </ul>
