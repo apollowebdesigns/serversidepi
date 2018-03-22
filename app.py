@@ -48,9 +48,8 @@ arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
     while True:
-        gevent.sleep(0.01)
         arduino.digitalWrite(TrigPin, arduino.LOW)
-        gevent.sleep(0.002)
+        gevent.sleep(0.01)
         arduino.digitalWrite(TrigPin, arduino.HIGH)
         gevent.sleep(0.01)
         arduino.digitalWrite(TrigPin, arduino.LOW)
