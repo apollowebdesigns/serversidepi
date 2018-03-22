@@ -33,6 +33,13 @@
             $(document).ready(
                     function() {
                         var sse, sse1;
+
+                        sse = new EventSource('/distance');
+                        sse.onmessage = function(message) {
+                            console.log('A message has arrived!');
+                            $('#output').append('<li>'+message.data+'</li>');
+                        }
+
                         $('#forwards').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
