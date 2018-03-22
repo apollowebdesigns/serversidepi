@@ -52,7 +52,7 @@ def sensor_distance():
     arduino.digitalWrite(TrigPin, arduino.HIGH)
     sleep(0.01)
     arduino.digitalWrite(TrigPin, arduino.LOW)
-    duration = arduino.pulseIn(echoPin, HIGH);
+    duration = arduino.pulseIn(EchoPin, arduino.HIGH);
     distance = (duration*.0343)/2;
 
 def kill_motors():
