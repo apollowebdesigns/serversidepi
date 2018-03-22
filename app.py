@@ -70,7 +70,6 @@ def event_stream():
     count = 0
     while True:
         gevent.sleep(0.01)
-        sensor_distance()
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
