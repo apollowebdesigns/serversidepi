@@ -46,6 +46,15 @@ arduino.pinMode(Motor2B,arduino.OUTPUT)
 arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
+def sensor_distance():
+    arduino.digitalWrite(TrigPin, arduino.LOW)
+    arduino.delayMicroseconds(2)
+    arduino.digitalWrite(TrigPin, arduino.HIGH)
+    arduino.delayMicroseconds(10)
+    arduino.digitalWrite(TrigPin, arduino.LOW)
+    duration = pulseIn(echoPin, HIGH);
+    distance = (duration*.0343)/2;
+
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
     arduino.digitalWrite(Motor2A,arduino.LOW)
