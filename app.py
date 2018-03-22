@@ -67,10 +67,16 @@ def event_stream():
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
     forwardsarrow.forwards()
-    sensor_distance()
     count = 0
     while True:
+        arduino.digitalWrite(TrigPin, arduino.LOW)
         gevent.sleep(0.01)
+        arduino.digitalWrite(TrigPin, arduino.HIGH)
+        arduino.digitalWrite(TrigPin, arduino.LOW)
+        duration = arduino.pulseIn(EchoPin, arduino.HIGH);
+        distance = (duration*.0343)/2;
+
+        # Pins for the motors
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
