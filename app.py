@@ -67,15 +67,15 @@ def event_stream():
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
     forwardsarrow.forwards()
+    sensor_distance()
     count = 0
     while True:
         gevent.sleep(0.01)
-        sensor_distance()
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
         arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % count
+        yield 'data: %s\n\n' % distance
         count += 1
 
 def move_backwards():
