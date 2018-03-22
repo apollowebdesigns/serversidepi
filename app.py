@@ -48,11 +48,11 @@ arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
     arduino.digitalWrite(TrigPin, arduino.LOW)
-    arduino.delayMicroseconds(2)
+    sleep(0.002)
     arduino.digitalWrite(TrigPin, arduino.HIGH)
-    arduino.delayMicroseconds(10)
+    sleep(0.01)
     arduino.digitalWrite(TrigPin, arduino.LOW)
-    duration = pulseIn(echoPin, HIGH);
+    duration = arduino.pulseIn(echoPin, HIGH);
     distance = (duration*.0343)/2;
 
 def kill_motors():
@@ -70,11 +70,12 @@ def event_stream():
     count = 0
     while True:
         gevent.sleep(0.01)
+        sensor_distance()
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
         arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % count
+        yield 'data: %s\n\n' % distance
         count += 1
 
 def move_backwards():
