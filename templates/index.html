@@ -36,8 +36,8 @@
 
                         sse = new EventSource('/distance');
                         sse.onmessage = function(message) {
-                            console.log('A message has arrived!');
-                            $('#output').append('<li>'+message.data+'</li>');
+                            console.log('finding that distance');
+                            $('#distance').append('<li>'+message.data+'</li>');
                         }
 
                         $('#forwards').mouseup(function(){
@@ -188,10 +188,20 @@
         <div class="parallax-container valign-wrapper">
             <div class="parallax"><iframe id="camera-screen" frameborder="0" class="iframe"></iframe></div>
         </div>
+        <div class="row">
+            <div class="col s6">
+                <ul id="distance">
 
-        <ul id="output">
+                </ul>
+            </div>
+            <div class="col s6">
+                <ul id="output">
 
-        </ul>
+                </ul>
+            </div>
+        </div>
+        
+        
 
     </body>
 
