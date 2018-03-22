@@ -48,9 +48,9 @@ arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
     arduino.digitalWrite(TrigPin, arduino.LOW)
-    sleep(0.002)
+    gevent.sleep(0.002)
     arduino.digitalWrite(TrigPin, arduino.HIGH)
-    sleep(0.01)
+    gevent.sleep(0.01)
     arduino.digitalWrite(TrigPin, arduino.LOW)
     duration = arduino.pulseIn(EchoPin, arduino.HIGH);
     distance = (duration*.0343)/2;
@@ -70,6 +70,7 @@ def event_stream():
     count = 0
     while True:
         gevent.sleep(0.01)
+        sensor_distance()
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
