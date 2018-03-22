@@ -26,8 +26,7 @@ TrigPin = 9
 EchoPin = 10
 
 # Init vars for distance sensing
-duration = 0
-distance = 0
+
 
 # Connecting to the Arduino
 try:
@@ -47,6 +46,8 @@ arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
+    duration = 0
+    distance = 0
     # arduino.digitalWrite(TrigPin, arduino.LOW)
     # sleep(0.01)
     # arduino.digitalWrite(TrigPin, arduino.HIGH)
@@ -55,9 +56,14 @@ def sensor_distance():
     # duration = arduino.pulseIn(EchoPin, arduino.HIGH);
     # distance = (duration*.0343)/2;
     while True:
+        arduino.digitalWrite(TrigPin, arduino.LOW)
         gevent.sleep(0.01)
-        distance = 7
+        arduino.digitalWrite(TrigPin, arduino.HIGH)
+        sleep(0.01)
+        arduino.digitalWrite(TrigPin, arduino.LOW)
         gevent.sleep(0.01)
+        duration = arduino.pulseIn(EchoPin, arduino.HIGH);
+        distance = (duration*.0343)/2;
         yield 'data: %s\n\n' % distance
         distance += 1
 
