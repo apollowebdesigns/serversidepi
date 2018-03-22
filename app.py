@@ -47,17 +47,19 @@ arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
-    arduino.digitalWrite(TrigPin, arduino.LOW)
-    sleep(0.01)
-    arduino.digitalWrite(TrigPin, arduino.HIGH)
-    sleep(0.01)
-    arduino.digitalWrite(TrigPin, arduino.LOW)
-    duration = arduino.pulseIn(EchoPin, arduino.HIGH);
-    distance = (duration*.0343)/2;
+    # arduino.digitalWrite(TrigPin, arduino.LOW)
+    # sleep(0.01)
+    # arduino.digitalWrite(TrigPin, arduino.HIGH)
+    # sleep(0.01)
+    # arduino.digitalWrite(TrigPin, arduino.LOW)
+    # duration = arduino.pulseIn(EchoPin, arduino.HIGH);
+    # distance = (duration*.0343)/2;
     while True:
         gevent.sleep(0.01)
+        distance = 7
+        gevent.sleep(0.01)
         yield 'data: %s\n\n' % distance
-        # distance += 1
+        distance += 1
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
