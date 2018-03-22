@@ -64,7 +64,7 @@ def sensor_distance():
         gevent.sleep(0.01)
         duration = arduino.pulseIn(EchoPin, arduino.HIGH);
         distance = (duration*.0343)/2;
-        yield 'data: %s\n\n' % distance
+        yield 'data: %s\n\n' % duration
         distance += 1
 
 def kill_motors():
