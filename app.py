@@ -49,12 +49,13 @@ arduino.pinMode(EchoPin,arduino.INPUT)
 def sensor_distance():
     while True:
         arduino.digitalWrite(TrigPin, arduino.LOW)
-        gevent.sleep(0.01)
+        sleep(0.01)
         arduino.digitalWrite(TrigPin, arduino.HIGH)
-        gevent.sleep(0.01)
+        sleep(0.01)
         arduino.digitalWrite(TrigPin, arduino.LOW)
         duration = arduino.pulseIn(EchoPin, arduino.HIGH);
         distance = (duration*.0343)/2;
+        gevent.sleep(0.01)
         yield 'data: %s\n\n' % distance
         # distance += 1
 
