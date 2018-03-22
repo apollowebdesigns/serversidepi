@@ -74,7 +74,7 @@ def event_stream():
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
         arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % distance
+        yield 'data: %s\n\n' % count
         count += 1
 
 def move_backwards():
