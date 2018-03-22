@@ -47,13 +47,17 @@ arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
-    arduino.digitalWrite(TrigPin, arduino.LOW)
-    gevent.sleep(0.002)
-    arduino.digitalWrite(TrigPin, arduino.HIGH)
-    gevent.sleep(0.01)
-    arduino.digitalWrite(TrigPin, arduino.LOW)
-    duration = arduino.pulseIn(EchoPin, arduino.HIGH);
-    distance = (duration*.0343)/2;
+    while True:
+        gevent.sleep(0.01)
+        arduino.digitalWrite(TrigPin, arduino.LOW)
+        gevent.sleep(0.002)
+        arduino.digitalWrite(TrigPin, arduino.HIGH)
+        gevent.sleep(0.01)
+        arduino.digitalWrite(TrigPin, arduino.LOW)
+        duration = arduino.pulseIn(EchoPin, arduino.HIGH);
+        distance = (duration*.0343)/2;
+        yield 'data: %s\n\n' % distance
+        # distance += 1
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
@@ -69,14 +73,7 @@ def event_stream():
     forwardsarrow.forwards()
     count = 0
     while True:
-        arduino.digitalWrite(TrigPin, arduino.LOW)
         gevent.sleep(0.01)
-        arduino.digitalWrite(TrigPin, arduino.HIGH)
-        arduino.digitalWrite(TrigPin, arduino.LOW)
-        duration = arduino.pulseIn(EchoPin, arduino.HIGH);
-        distance = (duration*.0343)/2;
-
-        # Pins for the motors
         arduino.digitalWrite(Motor1A,arduino.HIGH)
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
@@ -136,6 +133,12 @@ def event_end():
         gevent.sleep(0.1);
         yield 'data: %s\n\n' % count
         count = 0
+
+@app.route('/distance')
+def sse_distance():
+    return Response(
+            sensor_distance(),
+            mimetype='text/event-stream')
 
 @app.route('/my_event_source')
 def sse_request():
