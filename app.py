@@ -20,6 +20,15 @@ Motor1B = 3
 Motor2A = 4
 Motor2B = 5
 
+# Using distance sensor
+
+TrigPin = 9
+EchoPin = 10
+
+# Init vars for distance sensing
+duration = 0
+distance = 0
+
 # Connecting to the Arduino
 try:
     connection = SerialManager()
@@ -32,6 +41,10 @@ arduino.pinMode(Motor1A,arduino.OUTPUT)
 arduino.pinMode(Motor1B,arduino.OUTPUT)
 arduino.pinMode(Motor2A,arduino.OUTPUT)
 arduino.pinMode(Motor2B,arduino.OUTPUT)
+
+# Sensor set up
+arduino.pinMode(TrigPin,arduino.OUTPUT)
+arduino.pinMode(EchoPin,arduino.INPUT)
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
