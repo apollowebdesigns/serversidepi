@@ -26,11 +26,11 @@ arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
 while True:
-    arduino.digitalWrite(TrigPin, arduino.LOW)
+    arduino.analogWrite(TrigPin, 0)
     sleep(0.02)
-    arduino.digitalWrite(TrigPin, arduino.HIGH)
+    arduino.analogWrite(TrigPin, 8)
     sleep(0.1)
-    arduino.digitalWrite(TrigPin, arduino.LOW)
+    arduino.analogWrite(TrigPin, 0)
     duration = arduino.analogRead(EchoPin);
     distance = (duration*0.0343)/2;
     print('testing the loop')
