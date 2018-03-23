@@ -15,6 +15,9 @@ import backwardsarrow
 TrigPin = 9
 EchoPin = 10
 
+duration = 0
+distance = 0
+
 try:
     connection = SerialManager()
     arduino = ArduinoApi(connection = connection)
@@ -26,12 +29,12 @@ arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
 while True:
-    arduino.analogWrite(TrigPin, 0)
-    sleep(0.2)
-    arduino.analogWrite(TrigPin, 8)
-    sleep(1)
-    arduino.analogWrite(TrigPin, 0)
-    duration = arduino.analogRead(EchoPin);
+    arduino.digitalWrite(TrigPin, arduino.LOW)
+    sleep(0.02)
+    arduino.digitalWrite(TrigPin, arduino.HIGH)
+    sleep(0.1)
+    arduino.digitalWrite(TrigPin, arduino.LOW)
+    duration = arduino.pulseIn(EchoPin, arduino.HIGH);
     distance = (duration*0.0343)/2;
     print('testing the loop')
     print(duration)
