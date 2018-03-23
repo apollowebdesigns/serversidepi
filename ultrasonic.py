@@ -34,4 +34,5 @@ while True:
     duration = arduino.pulseIn(EchoPin, arduino.HIGH);
     distance = (duration*0.0343)/2;
     print('testing the loop')
+    print(duration)
     print(distance)
