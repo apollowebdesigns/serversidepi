@@ -27,9 +27,9 @@ arduino.pinMode(EchoPin,arduino.INPUT)
 
 while True:
     arduino.digitalWrite(TrigPin, arduino.LOW)
-    sleep(0.01)
+    sleep(0.2)
     arduino.digitalWrite(TrigPin, arduino.HIGH)
-    sleep(0.01)
+    sleep(1)
     arduino.digitalWrite(TrigPin, arduino.LOW)
     duration = arduino.digitalRead(EchoPin);
     distance = (duration*.0343)/2;
