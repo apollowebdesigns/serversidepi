@@ -31,7 +31,7 @@ while True:
     arduino.digitalWrite(TrigPin, arduino.HIGH)
     sleep(0.1)
     arduino.digitalWrite(TrigPin, arduino.LOW)
-    duration = arduino.digitalRead(EchoPin);
+    duration = arduino.analogueRead(EchoPin);
     distance = (duration*0.0343)/2;
     print('testing the loop')
     print(duration)
