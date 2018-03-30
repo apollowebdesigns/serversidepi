@@ -17,6 +17,11 @@ weather
 
 https://github.com/PyMySQL/PyMySQL this is your bible!!!
 
+## Using Postgres
+
+connect to database in postgres shell
+\c weather 
+
 ## SQL used to create database
 
 <code>
