@@ -16,7 +16,8 @@ except Exception:
     print('error getting sensehat temperature')
 
 # Getting data values
-string_datetimenow = str(datetime.datetime.now().isoformat())
+string_datetimenowlong = str(datetime.datetime.now().isoformat())
+string_datetimenow = string_datetimenowlong[0:18]
 string_temp = str(round(temp, 6))
 string_pressure = str(round(pressure, 6))
 string_humidity = str(round(humidity, 6))
@@ -43,7 +44,6 @@ def config(filename='database.ini', section='postgresql'):
     return db
 
 def insert_vendor_list(date, temperature, pressure, humidity):
-    date = date[0:16]
     """ insert a new vendor into the vendors table """
     sql = """INSERT INTO data(date, temperature, pressure, humidity)
              VALUES(%s, %s, %s, %s) RETURNING date;"""
