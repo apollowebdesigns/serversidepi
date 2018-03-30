@@ -43,6 +43,7 @@ def insert_vendor_list(date, temperature, pressure, humidity):
         conn.commit()
         # close communication with the database
         cur.close()
+        print('function executed ok')
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
