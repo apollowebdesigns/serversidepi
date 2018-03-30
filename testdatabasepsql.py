@@ -5,7 +5,7 @@ import sys
 conn = None
 
 try:  
-    conn = psycopg2.connect(host="localhost",database="suppliers", user="postgres", password="postgres")
+    conn = psycopg2.connect(host="localhost",database="weather", user="postgres", password="postgres")
     cur = conn.cursor()
     cur.execute('SELECT version()')          
     ver = cur.fetchone()
