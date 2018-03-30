@@ -43,7 +43,7 @@ def config(filename='database.ini', section='postgresql'):
     return db
 
 def insert_vendor_list(date, temperature, pressure, humidity):
-    date = date[:18]
+    date = date[0:16]
     """ insert a new vendor into the vendors table """
     sql = """INSERT INTO data(date, temperature, pressure, humidity)
              VALUES(%s, %s, %s, %s) RETURNING date;"""
