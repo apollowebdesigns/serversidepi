@@ -17,7 +17,7 @@ except Exception:
 
 # Getting data values
 string_datetimenowlong = str(datetime.datetime.now().isoformat())
-string_datetimenow = string_datetimenowlong[0:18]
+string_datetimenow = string_datetimenowlong[0:19]
 string_temp = str(round(temp, 6))
 string_pressure = str(round(pressure, 6))
 string_humidity = str(round(humidity, 6))
