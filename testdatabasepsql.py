@@ -14,12 +14,11 @@ try:
     print(ver)   
     
 
-except psycopg2.DatabaseError, e:
-    print 'Error %s' % e    
+except psycopg2.DatabaseError as e:
+    print(e)  
     sys.exit(1)
     
     
 finally:
-    
     if con:
         con.close()
