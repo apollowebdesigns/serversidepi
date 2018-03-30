@@ -65,13 +65,13 @@ try:
     print(ver)   
 
     insert_vendor_list([
-        ('AKM Semiconductor Inc.',),
+        ('AKM Sem',),
     ], [
-        ('AKM Semiconductor Inc.',),
+        ('AKM Semi',),
     ], [
-        ('AKM Semiconductor Inc.',),
+        ('AKM Semi',),
     ], [
-        ('AKM Semiconductor Inc.',),
+        ('AKM Semi',),
     ])
 
     print('added data correctly')
