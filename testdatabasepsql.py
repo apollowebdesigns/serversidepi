@@ -10,7 +10,8 @@ try:
     cur = con.cursor()
     cur.execute('SELECT version()')          
     ver = cur.fetchone()
-    print ver    
+    print('what is the version??')
+    print(ver)   
     
 
 except psycopg2.DatabaseError, e:
