@@ -2,11 +2,11 @@ import psycopg2
 import sys
 
 
-con = None
+conn = None
 
 try:  
-    con = psycopg2.connect("dbname=weather user=postgres password=postgres")
-    cur = con.cursor()
+    conn = psycopg2.connect(host="localhost",database="suppliers", user="postgres", password="postgres")
+    cur = conn.cursor()
     cur.execute('SELECT version()')          
     ver = cur.fetchone()
     print('what is the version??')
@@ -19,5 +19,5 @@ except psycopg2.DatabaseError as e:
     
     
 finally:
-    if con:
-        con.close()
+    if conn:
+        conn.close()
