@@ -17,9 +17,9 @@ except Exception:
 
 # Getting data values
 string_datetimenow = str(datetime.datetime.now().isoformat())
-string_temp = str(temp)
-string_pressure = str(pressure)
-string_humidity = str(humidity)
+string_temp = str(round(temp, 6))
+string_pressure = str(round(pressure, 6))
+string_humidity = str(round(humidity, 6))
 
 ## Connecting to database
 
