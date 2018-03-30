@@ -43,6 +43,36 @@ def config(filename='database.ini', section='postgresql'):
  
     return db
 
+
+def insert_vendor(vendor_name):
+    """ insert a new vendor into the vendors table """
+    sql = """INSERT INTO data(date, temperature, pressure, humidity)
+             VALUES(%s, %s, %s, %s) RETURNING date;"""
+    conn = None
+    vendor_id = None
+    try:
+        # read database configuration
+        params = config()
+        # connect to the PostgreSQL database
+        conn = psycopg2.connect(**params)
+        # create a new cursor
+        cur = conn.cursor()
+        # execute the INSERT statement
+        cur.execute(sql, (vendor_name,))
+        # get the generated id back
+        vendor_id = cur.fetchone()[0]
+        # commit the changes to the database
+        conn.commit()
+        # close communication with the database
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+ 
+    return vendor_id
+
 def insert_vendor_list(date, temperature, pressure, humidity):
     """ insert a new vendor into the vendors table """
     sql = """INSERT INTO data(date, temperature, pressure, humidity)
@@ -87,15 +117,7 @@ try:
     print('what is the version??')
     print(ver)   
 
-    insert_vendor_list([
-        string_datetimenow,
-    ], [
-        string_temp,
-    ], [
-        string_pressure,
-    ], [
-        string_humidity,
-    ])
+    insert_vendor(string_datetimenow, string_temp, string_pressure, string_humidity)
 
     print('added data correctly')
     
