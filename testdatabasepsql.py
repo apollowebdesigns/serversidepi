@@ -49,6 +49,7 @@ def insert_vendor_list(date, temperature, pressure, humidity):
     conn = None
     vendor_id = None
     try:
+        print('the input values are %s, %s, %s, %s', date, temperature, pressure, humidity)
         # read database configuration
         params = config()
         # connect to the PostgreSQL database
