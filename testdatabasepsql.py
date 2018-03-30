@@ -58,7 +58,7 @@ def insert_vendor(date, temperature, pressure, humidity):
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
-        cur.execute(sql, (vendor_name,))
+        cur.execute(sql, (date, temperature, pressure, humidity,))
         # get the generated id back
         vendor_id = cur.fetchone()[0]
         # commit the changes to the database
