@@ -2,6 +2,26 @@ import psycopg2
 from configparser import ConfigParser
 import sys
 
+from sense_hat import SenseHat
+import datetime
+
+sense = SenseHat()
+sense.clear()
+
+try:
+    temp = sense.get_temperature()
+    pressure = sense.get_pressure()
+    humidity = sense.get_humidity()
+except Exception:
+    print('error getting sensehat temperature')
+
+# Getting data values
+string_datetimenow = str(datetime.datetime.now().isoformat())
+string_temp = str(temp)
+string_pressure = str(pressure)
+string_humidity = str(humidity)
+
+## Connecting to database
 
 conn = None
 
@@ -66,13 +86,13 @@ try:
     print(ver)   
 
     insert_vendor_list([
-        ('AKM Sem',),
+        string_datetimenow,
     ], [
-        ('AKM Semi',),
+        string_temp,
     ], [
-        ('AKM Semi',),
+        string_pressure,
     ], [
-        ('AKM Semi',),
+        string_humidity,
     ])
 
     print('added data correctly')

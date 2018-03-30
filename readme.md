@@ -22,6 +22,10 @@ https://github.com/PyMySQL/PyMySQL this is your bible!!!
 connect to database in postgres shell
 \c weather 
 
+delete first few records
+
+DELETE FROM data;
+
 ## SQL used to create database
 
 <code>
