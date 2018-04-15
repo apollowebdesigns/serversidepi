@@ -35,3 +35,9 @@ create table data (date varchar(20), temperature varchar(20), pressure varchar(2
 ## Database more info
 
 http://pymysql.readthedocs.io/en/latest/user/examples.html
+
+## Machine learning tutorial for raspberry pi
+
+TOTO: integrate this
+
+https://www.pyimagesearch.com/2017/12/18/keras-deep-learning-raspberry-pi/
