@@ -34,6 +34,13 @@
                     function() {
                         var sse, sse1;
 
+                        sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+                        sseUltrasonic.onmessage = function(message) {
+                            console.log('Message from ultrasonic sensor');
+        //                    $('#output').append('<li>'+message.data+'</li>');
+                            document.getElementById('output').innerHTML = message.data;
+                        }
+
                         $('#dist').mouseup(function(){
                             sse.close();
                             $.get( "/end_motor_source", function(data) {
