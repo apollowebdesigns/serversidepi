@@ -51,11 +51,12 @@ function engageAutomaticMode() {
                 $( ".result" ).html( data );
             });
             sseRight = new EventSource('/right');
-            await sseRight.onmessage = async function(message) {
+            sseRight.onmessage = function(message) {
                 console.log('right!');
                 $('#output').append('<li>'+message.data+'</li>');
-                await sleep(500);
+                
             }
+            await sleep(500);
             sseRight.close();
             await $.get( "/end_motor_source", function(data) {
                 console.log('right has finished');
