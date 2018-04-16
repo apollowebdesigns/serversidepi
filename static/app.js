@@ -21,11 +21,17 @@ function killRequest() {
     });
 })(jQuery);
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function engageAutomaticMode() {
 
     // Start event source for ultrasonic sensor
     sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
-    sseForwards = new EventSource('/my_event_source');
+
+    // Set directions
+    // sseForwards = new EventSource('/my_event_source');
 
     sseUltrasonic.onmessage = async function(message) {
         console.log('Message from ultrasonic sensor');
@@ -42,8 +48,20 @@ function engageAutomaticMode() {
                 console.log('ending');
                 $( ".result" ).html( data );
             });
+            sseRight = new EventSource('/right');
+            sseRight.onmessage = function(message) {
+                console.log('right!');
+                $('#output').append('<li>'+message.data+'</li>');
+            }
+            await sleep(500);
+            sseRight.close();
+            await $.get( "/end_motor_source", function(data) {
+                console.log('ending');
+                $( ".result" ).html( data );
+            });
         }
         else {
+            sseForwards = new EventSource('/my_event_source');
             console.info('still going');
             document.getElementById('stop').innerHTML = 'GO'
             sseForwards.onmessage = function(message) {
