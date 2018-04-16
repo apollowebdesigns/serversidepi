@@ -40,11 +40,13 @@ $(document).ready(
         function() {
             var sse, sse1;
 
-            sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
-            sseUltrasonic.onmessage = function(message) {
-                console.log('Message from ultrasonic sensor');
-                document.getElementById('output').innerHTML = message.data;
-            }
+            // sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+            // sseUltrasonic.onmessage = function(message) {
+            //     console.log('Message from ultrasonic sensor');
+            //     document.getElementById('output').innerHTML = message.data;
+            // }
+
+            $('#automatic').click(engageAutomaticMode);
 
             $('#dist').mouseup(function(){
                 sse.close();
