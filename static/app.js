@@ -53,10 +53,10 @@ function engageAutomaticMode() {
                 console.log('right!');
                 $('#output').append('<li>'+message.data+'</li>');
             }
-            await sleep(500);
+            // await sleep(500);
             sseRight.close();
             await $.get( "/end_motor_source", function(data) {
-                console.log('ending');
+                console.log('right has finished');
                 $( ".result" ).html( data );
             });
         }
