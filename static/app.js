@@ -30,8 +30,14 @@ function engageAutomaticMode() {
         document.getElementById('output').innerHTML = message.data;
         let distance = message.data;
 
-        if (distance > 3) document.getElementById('stop').innerHTML = 'STOP';
-        else document.getElementById('stop').innerHTML = 'GO';
+        if (distance > 3) {
+            console.error('STOP');
+            document.getElementById('stop').innerHTML = 'STOP';
+        }
+        else {
+            console.info('still going');
+            document.getElementById('stop').innerHTML = 'GO'
+        };
 
     }
 }
