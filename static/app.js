@@ -37,7 +37,7 @@ function engageAutomaticMode() {
         if (distance < 6) {
             console.error('STOP');
             document.getElementById('stop').innerHTML = 'STOP';
-            sse.close();
+            sseForwards.close();
             await $.get( "/end_motor_source", function(data) {
                 console.log('ending');
                 $( ".result" ).html( data );
