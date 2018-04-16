@@ -21,6 +21,21 @@ function killRequest() {
     });
 })(jQuery);
 
+function engageAutomaticMode() {
+
+    // Start event source for ultrasonic sensor
+    sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+    sseUltrasonic.onmessage = function(message) {
+        console.log('Message from ultrasonic sensor');
+        document.getElementById('output').innerHTML = message.data;
+        let distance = message.data;
+
+        if (distance > 3) document.getElementById('stop').innerHTML = 'STOP';
+        else document.getElementById('stop').innerHTML = 'GO';
+
+    }
+}
+
 $(document).ready(
         function() {
             var sse, sse1;
@@ -28,7 +43,6 @@ $(document).ready(
             sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
             sseUltrasonic.onmessage = function(message) {
                 console.log('Message from ultrasonic sensor');
-//                    $('#output').append('<li>'+message.data+'</li>');
                 document.getElementById('output').innerHTML = message.data;
             }
 
