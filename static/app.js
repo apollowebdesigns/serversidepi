@@ -24,6 +24,12 @@ function killRequest() {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+  
+async function demo() {
+    console.log('Taking a break...');
+    await sleep(2000);
+    console.log('Two second later');
+}
 
 function engageAutomaticMode() {
     // Open up forwards
@@ -56,7 +62,7 @@ function engageAutomaticMode() {
                 $('#output').append('<li>'+message.data+'</li>');
                 
             }
-            await sleep(500);
+            demo();
             sseRight.close();
             await $.get( "/end_motor_source", function(data) {
                 console.log('right has finished');
