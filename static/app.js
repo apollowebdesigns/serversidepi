@@ -25,7 +25,9 @@ function engageAutomaticMode() {
 
     // Start event source for ultrasonic sensor
     sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
-    sseUltrasonic.onmessage = function(message) {
+    sseForwards = new EventSource('/my_event_source');
+
+    sseUltrasonic.onmessage = async function(message) {
         console.log('Message from ultrasonic sensor');
         document.getElementById('output').innerHTML = message.data;
         console.log('what is the message for automatic?');
@@ -35,10 +37,19 @@ function engageAutomaticMode() {
         if (distance < 6) {
             console.error('STOP');
             document.getElementById('stop').innerHTML = 'STOP';
+            sse.close();
+            await $.get( "/end_motor_source", function(data) {
+                console.log('ending');
+                $( ".result" ).html( data );
+            });
         }
         else {
             console.info('still going');
             document.getElementById('stop').innerHTML = 'GO'
+            sseForwards.onmessage = function(message) {
+                console.log('A message has arrived!');
+                $('#output').append('<li>'+message.data+'</li>');
+            }
         };
 
     }
@@ -47,12 +58,6 @@ function engageAutomaticMode() {
 $(document).ready(
         function() {
             var sse, sse1;
-
-            // sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
-            // sseUltrasonic.onmessage = function(message) {
-            //     console.log('Message from ultrasonic sensor');
-            //     document.getElementById('output').innerHTML = message.data;
-            // }
 
             $('#automatic').click(engageAutomaticMode);
 
