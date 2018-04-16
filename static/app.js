@@ -26,9 +26,11 @@ function sleep(ms) {
 }
 
 function engageAutomaticMode() {
+    // Open up forwards
+    var sseForwards = new EventSource('/my_event_source');
 
     // Start event source for ultrasonic sensor
-    sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+    var sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
 
     // Set directions
     // sseForwards = new EventSource('/my_event_source');
@@ -45,7 +47,7 @@ function engageAutomaticMode() {
             document.getElementById('stop').innerHTML = 'STOP';
             sseForwards.close();
             await $.get( "/end_motor_source", function(data) {
-                console.log('ending');
+                console.log('stop forwards');
                 $( ".result" ).html( data );
             });
             sseRight = new EventSource('/right');
@@ -59,9 +61,11 @@ function engageAutomaticMode() {
                 console.log('right has finished');
                 $( ".result" ).html( data );
             });
+
+            // Reset to fowards
+            sseForwards = new EventSource('/my_event_source');
         }
         else {
-            sseForwards = new EventSource('/my_event_source');
             console.info('still going');
             document.getElementById('stop').innerHTML = 'GO'
             sseForwards.onmessage = function(message) {
