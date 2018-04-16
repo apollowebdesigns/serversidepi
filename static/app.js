@@ -28,6 +28,8 @@ function engageAutomaticMode() {
     sseUltrasonic.onmessage = function(message) {
         console.log('Message from ultrasonic sensor');
         document.getElementById('output').innerHTML = message.data;
+        console.log('what is the message for automatic?');
+        console.log(message.data);
         let distance = message.data;
 
         if (distance < 3) {
