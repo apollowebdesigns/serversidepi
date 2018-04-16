@@ -32,7 +32,7 @@ function engageAutomaticMode() {
         console.log(message.data);
         let distance = message.data;
 
-        if (distance < 3) {
+        if (distance < 6) {
             console.error('STOP');
             document.getElementById('stop').innerHTML = 'STOP';
         }
