@@ -51,7 +51,7 @@ function engageAutomaticMode() {
                 $( ".result" ).html( data );
             });
             sseRight = new EventSource('/right');
-            sseRight.onmessage = async function(message) {
+            await sseRight.onmessage = async function(message) {
                 console.log('right!');
                 $('#output').append('<li>'+message.data+'</li>');
                 await sleep(500);
