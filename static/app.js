@@ -15,10 +15,6 @@ async function demo() {
     console.log('Two second later');
 }
 
-function engageManualMode() {
-    return killRequest();
-}
-
 function engageAutomaticMode() {
     // Open up forwards
     var sseForwards = new EventSource('/my_event_source');
@@ -91,6 +87,15 @@ $(document).ready(
                     console.log('A message has arrived!');
                     $('#output').append('<li>'+message.data+'</li>');
                 }
+            }
+
+            function engageManualMode() {
+                sse.close();
+                $.get( "/end_motor_source", function(data) {
+                    console.log('ending');
+                    $( ".result" ).html( data );
+                });
+                return killRequest();
             }
 
             $('#automatic').click(engageAutomaticMode);
