@@ -62,7 +62,7 @@ function engageAutomaticMode() {
                 $('#output').append('<li>'+message.data+'</li>');
                 
             }
-            demo();
+
             sseRight.close();
             await $.get( "/end_motor_source", function(data) {
                 console.log('right has finished');
@@ -88,6 +88,15 @@ $(document).ready(
         function() {
             var sse, sse1;
 
+            function stopRequest(){
+                sse.close();
+                $.get( "/end_motor_source", function(data) {
+                    console.log('ending');
+                    $( ".result" ).html( data );
+                });
+                return killRequest();
+            }
+
             $('#automatic').click(engageAutomaticMode);
 
             $('#dist').mouseup(function(){
@@ -106,14 +115,7 @@ $(document).ready(
                 }
             })
 
-            $('#forwards').mouseup(function(){
-                sse.close();
-                $.get( "/end_motor_source", function(data) {
-                    console.log('ending');
-                    $( ".result" ).html( data );
-                });
-                return killRequest();
-            }).mousedown(function(){
+            $('#forwards').mouseup(stopRequest).mousedown(function(){
                 sse = new EventSource('/my_event_source');
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
@@ -121,14 +123,7 @@ $(document).ready(
                 }
             })
 
-            $('#backwards').mouseup(function(){
-                sse.close();
-                $.get( "/end_motor_source", function(data) {
-                    console.log('ending');
-                    $( ".result" ).html( data );
-                });
-                return killRequest();
-            }).mousedown(function(){
+            $('#backwards').mouseup(stopRequest).mousedown(function(){
                 sse = new EventSource('/backwards');
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
@@ -136,14 +131,7 @@ $(document).ready(
                 }
             })
 
-            $('#right').mouseup(function(){
-                sse.close();
-                $.get( "/end_motor_source", function(data) {
-                    console.log('ending');
-                    $( ".result" ).html( data );
-                });
-                return killRequest();
-            }).mousedown(function(){
+            $('#right').mouseup(stopRequest).mousedown(function(){
                 sse = new EventSource('/right');
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
@@ -151,14 +139,7 @@ $(document).ready(
                 }
             })
 
-            $('#left').mouseup(function(){
-                sse.close();
-                $.get( "/end_motor_source", function(data) {
-                    console.log('ending');
-                    $( ".result" ).html( data );
-                });
-                return killRequest();
-            }).mousedown(function(){
+            $('#left').mouseup(stopRequest).mousedown(function(){
                 sse = new EventSource('/left');
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
