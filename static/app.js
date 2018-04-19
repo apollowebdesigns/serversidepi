@@ -123,8 +123,6 @@ $(document).ready(
                 }
             })
 
-            '/my_event_source'
-
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
 
             $('#backwards').mouseup(stopRequest).mousedown(function(){
