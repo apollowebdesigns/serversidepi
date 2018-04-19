@@ -97,6 +97,14 @@ $(document).ready(
                 return killRequest();
             }
 
+            function eventSourceCreator(direction){
+                sse = new EventSource(direction);
+                sse.onmessage = function(message) {
+                    console.log('A message has arrived!');
+                    $('#output').append('<li>'+message.data+'</li>');
+                }
+            }
+
             $('#automatic').click(engageAutomaticMode);
 
             $('#dist').mouseup(function(){
@@ -115,13 +123,9 @@ $(document).ready(
                 }
             })
 
-            $('#forwards').mouseup(stopRequest).mousedown(function(){
-                sse = new EventSource('/my_event_source');
-                sse.onmessage = function(message) {
-                    console.log('A message has arrived!');
-                    $('#output').append('<li>'+message.data+'</li>');
-                }
-            })
+            '/my_event_source'
+
+            $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
 
             $('#backwards').mouseup(stopRequest).mousedown(function(){
                 sse = new EventSource('/backwards');
