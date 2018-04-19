@@ -15,6 +15,10 @@ async function demo() {
     console.log('Two second later');
 }
 
+function engageManualMode() {
+    return killRequest();
+}
+
 function engageAutomaticMode() {
     // Open up forwards
     var sseForwards = new EventSource('/my_event_source');
@@ -90,6 +94,7 @@ $(document).ready(
             }
 
             $('#automatic').click(engageAutomaticMode);
+            $('#manual').click(engageManualMode);
 
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
