@@ -107,45 +107,8 @@ $(document).ready(
 
             $('#automatic').click(engageAutomaticMode);
 
-            $('#dist').mouseup(function(){
-                sse.close();
-                $.get( "/end_motor_source", function(data) {
-                    console.log('ending');
-                    $( ".result" ).html( data );
-                });
-                return killRequest();
-            }).mousedown(function(){
-                sse = new EventSource('/distance');
-                sse.onmessage = function(message) {
-                    console.log('finding that distance');
-                    console.log(message);
-                    $('#distance').append('<li>'+message.data+'</li>');
-                }
-            })
-
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
-
-            $('#backwards').mouseup(stopRequest).mousedown(function(){
-                sse = new EventSource('/backwards');
-                sse.onmessage = function(message) {
-                    console.log('A message has arrived!');
-                    $('#output').append('<li>'+message.data+'</li>');
-                }
-            })
-
-            $('#right').mouseup(stopRequest).mousedown(function(){
-                sse = new EventSource('/right');
-                sse.onmessage = function(message) {
-                    console.log('A message has arrived!');
-                    $('#output').append('<li>'+message.data+'</li>');
-                }
-            })
-
-            $('#left').mouseup(stopRequest).mousedown(function(){
-                sse = new EventSource('/left');
-                sse.onmessage = function(message) {
-                    console.log('A message has arrived!');
-                    $('#output').append('<li>'+message.data+'</li>');
-                }
-            })
+            $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
+            $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
+            $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
         })
