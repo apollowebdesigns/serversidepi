@@ -15,7 +15,8 @@ async function demo() {
     console.log('Two second later');
 }
 
-function engageAutomaticMode() {
+function engageAutomaticMode(orManual) {
+    
     // Open up forwards
     var sseForwards = new EventSource('/my_event_source');
 
@@ -24,6 +25,9 @@ function engageAutomaticMode() {
 
     // Set directions
     // sseForwards = new EventSource('/my_event_source');
+    if(orManual) {
+        
+    }
 
     sseUltrasonic.onmessage = async function(message) {
         console.log('Message from ultrasonic sensor');
@@ -35,6 +39,7 @@ function engageAutomaticMode() {
         if (distance < 6) {
             console.error('STOP');
             document.getElementById('stop').innerHTML = 'STOP';
+            console.log('before the end');
             sseForwards.close();
             await $.get( "/end_motor_source", function(data) {
                 console.log('stop forwards');
@@ -98,8 +103,8 @@ $(document).ready(
                 return killRequest();
             }
 
-            $('#automatic').click(engageAutomaticMode);
-            $('#manual').click(engageManualMode);
+            $('#automatic').click(() => engageAutomaticMode(false));
+            $('#manual').click(() => engageAutomaticMode(true));
 
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
