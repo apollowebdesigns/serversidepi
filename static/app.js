@@ -15,10 +15,10 @@ async function demo() {
     console.log('Two second later');
 }
 
-function engageAutomaticMode(orManual) {
+function engageAutomaticMode(orManual, sseForwards) {
     
     // Open up forwards
-    var sseForwards = new EventSource('/my_event_source');
+    sseForwards = new EventSource('/my_event_source');
 
     // Start event source for ultrasonic sensor
     var sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
@@ -103,8 +103,8 @@ $(document).ready(
                 return killRequest();
             }
 
-            $('#automatic').click(() => engageAutomaticMode(false));
-            $('#manual').click(() => engageAutomaticMode(true));
+            $('#automatic').click(() => engageAutomaticMode(false, sse));
+            $('#manual').click(() => engageAutomaticMode(true, sse));
 
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
