@@ -10,6 +10,8 @@ from sense_hat import SenseHat
 import forwardsarrow
 import backwardsarrow
 
+from sseclient import SSEClient
+
 app = Flask(__name__)
 
 # Allow CORS for client to access server sent events
@@ -46,26 +48,31 @@ arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
 def sensor_distance():
-    duration = 0
-    distance = 0
-    # arduino.digitalWrite(TrigPin, arduino.LOW)
-    # sleep(0.01)
-    # arduino.digitalWrite(TrigPin, arduino.HIGH)
-    # sleep(0.01)
-    # arduino.digitalWrite(TrigPin, arduino.LOW)
-    # duration = arduino.pulseIn(EchoPin, arduino.HIGH);
-    # distance = (duration*.0343)/2;
-    while True:
-        arduino.digitalWrite(TrigPin, arduino.LOW)
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
+    forwardsarrow.forwards()
+    count = 0
+    messages = SSEClient('http://192.168.1.67/my_event_source')
+    for msg in messages:
         gevent.sleep(0.01)
-        arduino.digitalWrite(TrigPin, arduino.HIGH)
-        sleep(0.01)
-        arduino.digitalWrite(TrigPin, arduino.LOW)
-        gevent.sleep(0.01)
-        duration = arduino.digitalRead(EchoPin);
-        distance = (duration*.0343)/2;
-        yield 'data: %s\n\n' % duration
-        duration += 1
+        print(msg)
+        arduino.digitalWrite(Motor1A,arduino.HIGH)
+        arduino.digitalWrite(Motor1B,arduino.LOW)
+        arduino.digitalWrite(Motor2A,arduino.HIGH)
+        arduino.digitalWrite(Motor2B,arduino.LOW)
+        yield 'data: %s\n\n' % count
+        count = messages
+    # while True:
+    #     gevent.sleep(0.01)
+        # arduino.digitalWrite(Motor1A,arduino.HIGH)
+        # arduino.digitalWrite(Motor1B,arduino.LOW)
+        # arduino.digitalWrite(Motor2A,arduino.HIGH)
+        # arduino.digitalWrite(Motor2B,arduino.LOW)
+    #     yield 'data: %s\n\n' % count
+    #     count += 1
+
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
@@ -86,7 +93,7 @@ def event_stream():
         arduino.digitalWrite(Motor1B,arduino.LOW)
         arduino.digitalWrite(Motor2A,arduino.HIGH)
         arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % distance
+        yield 'data: %s\n\n' % count
         count += 1
 
 def move_backwards():
