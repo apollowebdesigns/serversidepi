@@ -36,6 +36,24 @@ function engageAutomaticMode(orManual, sseForwards) {
         console.log(message.data);
         let distance = message.data;
 
+        function flickRight() {
+            return new Promise(resolve => setTimeout(function(){
+                sseRight = new EventSource('/right');
+                sseRight.onmessage = function(message) {
+                    console.log('right!');
+                    $('#output').append('<li>'+message.data+'</li>');
+                    
+                }
+                
+                sseRight.close();
+
+                return $.get( "/end_motor_source", function(data) {
+                    console.log('stop moving right');
+                    $( ".result" ).html( data );
+                });
+            },2000))
+        }
+
         if (distance < 6) {
             console.error('STOP');
             document.getElementById('stop').innerHTML = 'STOP';
@@ -46,21 +64,7 @@ function engageAutomaticMode(orManual, sseForwards) {
                 $( ".result" ).html( data );
             });
 
-            setTimeout(function(){
-                sseRight = new EventSource('/right');
-                sseRight.onmessage = function(message) {
-                    console.log('right!');
-                    $('#output').append('<li>'+message.data+'</li>');
-                    
-                }
-                
-                sseRight.close();
-
-                $.get( "/end_motor_source", function(data) {
-                    console.log('stop moving right');
-                    $( ".result" ).html( data );
-                });
-            },2000);
+            var thing = await flickRight();
             
             await $.get( "/end_motor_source", function(data) {
                 console.log('right has finished');
