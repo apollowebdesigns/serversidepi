@@ -63,12 +63,17 @@ function engageAutomaticMode(orManual, sseForwards) {
                 console.log('stop forwards');
                 $( ".result" ).html( data );
             });
-
-            var thing = await flickRight();
             
             await $.get( "/end_motor_source", function(data) {
                 console.log('right has finished');
                 $( ".result" ).html( data );
+                return flickRight().then(() => {
+                    console.log('right has been hit!')
+                    return $.get( "/end_motor_source", function(data) {
+                        console.log('stop forwards');
+                        $( ".result" ).html( data );
+                    });
+                })
             });
 
             // Reset to fowards
