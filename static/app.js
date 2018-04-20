@@ -44,16 +44,23 @@ function engageAutomaticMode(orManual, sseForwards) {
             await $.get( "/end_motor_source", function(data) {
                 console.log('stop forwards');
                 $( ".result" ).html( data );
+            });
 
+            setTimeout(function(){
                 sseRight = new EventSource('/right');
                 sseRight.onmessage = function(message) {
                     console.log('right!');
                     $('#output').append('<li>'+message.data+'</li>');
                     
                 }
-
+                
                 sseRight.close();
-            });
+
+                $.get( "/end_motor_source", function(data) {
+                    console.log('stop moving right');
+                    $( ".result" ).html( data );
+                });
+            },2000);
             
             await $.get( "/end_motor_source", function(data) {
                 console.log('right has finished');
