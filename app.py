@@ -10,8 +10,6 @@ from sense_hat import SenseHat
 import forwardsarrow
 import backwardsarrow
 
-from sseclient import SSEClient
-
 app = Flask(__name__)
 
 # Allow CORS for client to access server sent events
