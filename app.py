@@ -7,6 +7,7 @@ from time import sleep
 from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 from sense_hat import SenseHat
+from sseclient import SSEClient
 import forwardsarrow
 import backwardsarrow
 
@@ -44,6 +45,32 @@ arduino.pinMode(Motor2B,arduino.OUTPUT)
 # Sensor set up
 arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
+
+def sensor_distance():
+    arduino.digitalWrite(Motor1A,arduino.LOW)
+    arduino.digitalWrite(Motor2A,arduino.LOW)
+    arduino.digitalWrite(Motor1B,arduino.LOW)
+    arduino.digitalWrite(Motor2B,arduino.LOW)
+    forwardsarrow.forwards()
+    count = 0
+    messages = SSEClient('http://192.168.1.67/my_event_source')
+    for msg in messages:
+        gevent.sleep(0.01)
+        print(msg)
+        arduino.digitalWrite(Motor1A,arduino.HIGH)
+        arduino.digitalWrite(Motor1B,arduino.LOW)
+        arduino.digitalWrite(Motor2A,arduino.HIGH)
+        arduino.digitalWrite(Motor2B,arduino.LOW)
+        yield 'data: %s\n\n' % count
+        count = messages
+    # while True:
+    #     gevent.sleep(0.01)
+        # arduino.digitalWrite(Motor1A,arduino.HIGH)
+        # arduino.digitalWrite(Motor1B,arduino.LOW)
+        # arduino.digitalWrite(Motor2A,arduino.HIGH)
+        # arduino.digitalWrite(Motor2B,arduino.LOW)
+    #     yield 'data: %s\n\n' % count
+    #     count += 1
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
