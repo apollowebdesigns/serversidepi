@@ -119,7 +119,8 @@ $(document).ready(
             $('#automatic').click(() => engageAutomaticMode(false, sse));
             $('#manual').click(() => engageAutomaticMode(true, sse));
 
-            $('#distance').mouseup(stopRequest).mousedown(() => eventSourceCreator('/distance'))
+            $('#stop').mouseup(stopRequest)
+            $('#distance').click(() => eventSourceCreator('/my_event_source'))
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))

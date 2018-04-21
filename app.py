@@ -47,33 +47,6 @@ arduino.pinMode(Motor2B,arduino.OUTPUT)
 arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
-def sensor_distance():
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    forwardsarrow.forwards()
-    count = 0
-    messages = SSEClient('http://192.168.1.67/my_event_source')
-    for msg in messages:
-        gevent.sleep(0.01)
-        print(msg)
-        arduino.digitalWrite(Motor1A,arduino.HIGH)
-        arduino.digitalWrite(Motor1B,arduino.LOW)
-        arduino.digitalWrite(Motor2A,arduino.HIGH)
-        arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % count
-        count = messages
-    # while True:
-    #     gevent.sleep(0.01)
-        # arduino.digitalWrite(Motor1A,arduino.HIGH)
-        # arduino.digitalWrite(Motor1B,arduino.LOW)
-        # arduino.digitalWrite(Motor2A,arduino.HIGH)
-        # arduino.digitalWrite(Motor2B,arduino.LOW)
-    #     yield 'data: %s\n\n' % count
-    #     count += 1
-
-
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
     arduino.digitalWrite(Motor2A,arduino.LOW)
@@ -148,12 +121,6 @@ def event_end():
         gevent.sleep(0.1);
         yield 'data: %s\n\n' % count
         count = 0
-
-@app.route('/distance')
-def sse_distance():
-    return Response(
-            sensor_distance(),
-            mimetype='text/event-stream')
 
 @app.route('/my_event_source')
 def sse_request():
