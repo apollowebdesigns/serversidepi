@@ -122,7 +122,15 @@ $(document).ready(
             $('#automatic').click(() => eventSourceCreator('/distance'))
 
             $('#stop').mouseup(stopRequest)
-            $('#distance').click(() => eventSourceCreator('/my_event_source'))
+
+            $('#distance')
+                .click(() => {
+                    eventSourceCreator('/my_event_source')
+                    stopRequest()
+                    eventSourceCreator('/right')
+                })
+
+            
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
