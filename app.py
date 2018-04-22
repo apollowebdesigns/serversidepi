@@ -54,7 +54,30 @@ def sensor_distance():
     forwardsarrow.forwards()
     count = 0
     messages = SSEClient('http://192.168.1.67/my_event_source')
+
+    # TODO evaluate messages inside the loop
     for msg in messages:
+        if msg < 5:
+            # Stop
+            arduino.digitalWrite(Motor1A,arduino.LOW)
+            arduino.digitalWrite(Motor2A,arduino.LOW)
+            arduino.digitalWrite(Motor1B,arduino.LOW)
+            arduino.digitalWrite(Motor2B,arduino.LOW)
+
+            # Move right
+            arduino.digitalWrite(Motor1A,arduino.LOW)
+            arduino.digitalWrite(Motor1B,arduino.HIGH)
+            arduino.digitalWrite(Motor2A,arduino.HIGH)
+            arduino.digitalWrite(Motor2B,arduino.LOW)
+
+            sleep(0.5)
+
+            # Stop
+            arduino.digitalWrite(Motor1A,arduino.LOW)
+            arduino.digitalWrite(Motor2A,arduino.LOW)
+            arduino.digitalWrite(Motor1B,arduino.LOW)
+            arduino.digitalWrite(Motor2B,arduino.LOW)
+
         gevent.sleep(0.01)
         print(msg)
         arduino.digitalWrite(Motor1A,arduino.HIGH)
@@ -63,14 +86,6 @@ def sensor_distance():
         arduino.digitalWrite(Motor2B,arduino.LOW)
         yield 'data: %s\n\n' % count
         count = messages
-    # while True:
-    #     gevent.sleep(0.01)
-        # arduino.digitalWrite(Motor1A,arduino.HIGH)
-        # arduino.digitalWrite(Motor1B,arduino.LOW)
-        # arduino.digitalWrite(Motor2A,arduino.HIGH)
-        # arduino.digitalWrite(Motor2B,arduino.LOW)
-    #     yield 'data: %s\n\n' % count
-    #     count += 1
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
