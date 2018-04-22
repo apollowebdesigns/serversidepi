@@ -162,6 +162,12 @@ def event_end():
         yield 'data: %s\n\n' % count
         count = 0
 
+@app.route('/distance')
+def sensor_distance():
+    return Response(
+            event_stream(),
+            mimetype='text/event-stream')
+
 @app.route('/my_event_source')
 def sse_request():
     return Response(

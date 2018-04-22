@@ -116,8 +116,10 @@ $(document).ready(
                 return killRequest();
             }
 
-            $('#automatic').click(() => engageAutomaticMode(false, sse));
-            $('#manual').click(() => engageAutomaticMode(true, sse));
+            // $('#automatic').click(() => engageAutomaticMode(false, sse));
+            // $('#manual').click(() => engageAutomaticMode(true, sse));
+
+            $('#automatic').click(() => eventSourceCreator('/distance'))
 
             $('#stop').mouseup(stopRequest)
             $('#distance').click(() => eventSourceCreator('/my_event_source'))
