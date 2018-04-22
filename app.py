@@ -165,9 +165,9 @@ def event_end():
         count = 0
 
 @app.route('/distance')
-def sensor_distance():
+def sse_sensor_distance():
     return Response(
-            event_stream(),
+            sensor_distance(),
             mimetype='text/event-stream')
 
 @app.route('/my_event_source')
