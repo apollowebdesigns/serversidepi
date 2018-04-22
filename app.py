@@ -57,6 +57,8 @@ def sensor_distance():
 
     # TODO evaluate messages inside the loop
     for msg in messages:
+        print('what is inside the messages?')
+        print(msg)
         if msg < 5:
             # Stop
             arduino.digitalWrite(Motor1A,arduino.LOW)
