@@ -125,9 +125,30 @@ $(document).ready(
 
             $('#distance')
                 .click(() => {
-                    eventSourceCreator('/my_event_source')
-                    stopRequest()
-                    eventSourceCreator('/right')
+                    var promise1 = new Promise(function(resolve, reject) {
+                        resolve('Started');
+                    }).then(function() {
+                        return new Promise(function(resolve, reject) {
+                            setTimeout(function() {
+                              resolve(eventSourceCreator('/my_event_source'));
+                            }, 1);
+                          });
+                    }).then(function(output) {
+                        return new Promise(function(resolve, reject) {
+                            setTimeout(function() {
+                              resolve(stopRequest());
+                            }, 1);
+                          });
+                    }).then(function() {
+                        return new Promise(function(resolve, reject) {
+                            setTimeout(function() {
+                              resolve(eventSourceCreator('/right'));
+                            }, 1);
+                          });
+                    })
+                    // eventSourceCreator('/my_event_source')
+                    // stopRequest()
+                    // eventSourceCreator('/right')
                 })
 
             
