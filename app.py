@@ -53,7 +53,7 @@ def sensor_distance():
     arduino.digitalWrite(Motor2B,arduino.LOW)
     forwardsarrow.forwards()
     count = 0
-    messages = SSEClient('http://192.168.1.67/my_event_source')
+    messages = SSEClient('http://192.168.1.83/my_event_source')
 
     # TODO evaluate messages inside the loop
     for msg in messages:
