@@ -118,6 +118,9 @@ $(document).ready(
 
             // $('#automatic').click(() => engageAutomaticMode(false, sse));
             // $('#manual').click(() => engageAutomaticMode(true, sse));
+            function stopUltrasonicRequest(){
+                return sseUltrasonic.close();
+            }
 
             function ultrasonicSourceCreator(){
                 sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
@@ -133,6 +136,7 @@ $(document).ready(
 
             $('#distance').click(() => eventSourceCreator('/my_event_source'))
             $('#ultrasonic').click(() => ultrasonicSourceCreator())
+            $('#ultrasonicStop').click(() => stopUltrasonicRequest())
 
             
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
