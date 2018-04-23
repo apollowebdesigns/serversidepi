@@ -128,6 +128,7 @@ $(document).ready(
                 sseUltrasonic.onmessage = function(message) {
                     console.log('ultrasonic message here');
                     if (parseInt(message.data) < 8) {
+                        console.error('too close');
                         $('#output').append('too close!!!!');
                     }   else {
                         $('#output').append('<li>'+message.data+'</li>');
