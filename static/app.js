@@ -119,6 +119,12 @@ $(document).ready(
             // $('#automatic').click(() => engageAutomaticMode(false, sse));
             // $('#manual').click(() => engageAutomaticMode(true, sse));
 
+            let sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+            sseUltrasonic.onmessage = function(message) {
+                console.log('ultrasonic message here');
+                $('#output').append('<li>'+message.data+'</li>');
+            }
+
             $('#automatic').click(() => eventSourceCreator('/distance'))
 
             $('#stop').mouseup(stopRequest)
