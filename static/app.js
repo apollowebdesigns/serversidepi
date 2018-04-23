@@ -127,9 +127,11 @@ $(document).ready(
                 sseUltrasonic = new EventSource('http://192.168.1.83/my_event_source');
                 sseUltrasonic.onmessage = function(message) {
                     console.log('ultrasonic message here');
-                    $('#output').append('<li>'+message.data+'</li>');
-                    console.log(message);
-                    if (message.data < 8) console.log('you are too Close!!');
+                    if (parseInt(message.data) < 8) {
+                        $('#output').append('too close!!!!');
+                    }   else {
+                        $('#output').append('<li>'+message.data+'</li>');
+                    }
                 }
             }
 
