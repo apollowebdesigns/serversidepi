@@ -130,7 +130,10 @@ $(document).ready(
                     if (parseInt(message.data) < 8) {
                         console.error('too close');
                         $('#output').append('too close!!!!');
+                        stopRequest();
+                        eventSourceCreator('/right')
                     }   else {
+                        eventSourceCreator('/my_event_source')
                         $('#output').append('<li>'+message.data+'</li>');
                     }
                 }
