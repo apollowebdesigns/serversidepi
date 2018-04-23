@@ -123,7 +123,8 @@ $(document).ready(
             }
 
             function ultrasonicSourceCreator(){
-                sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+                console.log('inside ultrasonic')
+                sseUltrasonic = new EventSource('http://192.168.1.83/my_event_source');
                 sseUltrasonic.onmessage = function(message) {
                     console.log('ultrasonic message here');
                     $('#output').append('<li>'+message.data+'</li>');
