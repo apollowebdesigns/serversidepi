@@ -128,6 +128,8 @@ $(document).ready(
                 sseUltrasonic.onmessage = function(message) {
                     console.log('ultrasonic message here');
                     $('#output').append('<li>'+message.data+'</li>');
+                    let distance = message.data;
+                    if (distance < 8) console.log('you are too Close!!');
                 }
             }
 
