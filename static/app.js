@@ -88,7 +88,7 @@ function engageAutomaticMode(orManual, sseForwards) {
 
 $(document).ready(
         function() {
-            var sse, sse1;
+            var sse, sse1, sseUltrasonic;
 
             function stopRequest(){
                 sse.close();
@@ -119,10 +119,12 @@ $(document).ready(
             // $('#automatic').click(() => engageAutomaticMode(false, sse));
             // $('#manual').click(() => engageAutomaticMode(true, sse));
 
-            let sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
-            sseUltrasonic.onmessage = function(message) {
-                console.log('ultrasonic message here');
-                $('#output').append('<li>'+message.data+'</li>');
+            function ultrasonicSourceCreator(){
+                sseUltrasonic = new EventSource('http://192.168.1.67/my_event_source');
+                sseUltrasonic.onmessage = function(message) {
+                    console.log('ultrasonic message here');
+                    $('#output').append('<li>'+message.data+'</li>');
+                }
             }
 
             $('#automatic').click(() => eventSourceCreator('/distance'))
@@ -130,7 +132,7 @@ $(document).ready(
             $('#stop').mouseup(stopRequest)
 
             $('#distance').click(() => eventSourceCreator('/my_event_source'))
-            $('#distance').click(() => eventSourceCreator('/my_event_source'))
+            $('#ultrasonic').click(() => ultrasonicSourceCreator())
 
             
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
