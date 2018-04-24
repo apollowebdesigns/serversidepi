@@ -7,6 +7,8 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='init.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='app/app.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='app/controllers/MainController.js') }}"></script>
         <script type="text/javascript">
         </script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -93,9 +95,10 @@
         </style>
     </head>
 
-    <body class="container" ng-app="app">
+    <body class="container" ng-app="app" ng-controller="MainController as mainCtrl">
 
         <h2 class="heading">Demo</h2>
+        <p ng-bind="mainCtrl.test"></p>
         <button class="btn waves-effect waves-light" id="forwards">Forwards</button>
         <button class="btn waves-effect waves-light" id="backwards">Backwards</button>
         <button class="btn waves-effect waves-light" id="right">Right</button>
