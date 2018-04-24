@@ -2,13 +2,24 @@ angular
     .module('app')
     .controller('MainController', MainController);
 
-function MainController() {
+MainController.$inject = ['$http'];
+
+function MainController($http) {
     var vm = this;
 
-    var sse, sse1, sseUltrasonic;
+    vm.sse; 
+    vm.sse1 
+    vm.sseUltrasonic;
+
+    function killRequest() {
+        return $http.get( "/end_motor_source", function(data) {
+                        console.log('ending');
+                        $( ".result" ).html( data );
+                    });
+    }
 
     function stopRequest(){
-        sse.close();
+        vm.sse.close();
         $.get( "/end_motor_source", function(data) {
             console.log('ending');
             $( ".result" ).html( data );
@@ -17,16 +28,16 @@ function MainController() {
     }
 
     function eventSourceCreator(direction){
-        sse = new EventSource(direction);
-        sse.onmessage = function(message) {
+        vm.sse = new EventSource(direction);
+        vm.sse.onmessage = function(message) {
             console.log('A message has arrived!');
             $('#output').append('<li>'+message.data+'</li>');
         }
     }
 
     function engageManualMode() {
-        sse.close();
-        $.get( "/end_motor_source", function(data) {
+        vm.sse.close();
+        $http.get( "/end_motor_source", function(data) {
             console.log('ending');
             $( ".result" ).html( data );
         });
@@ -36,13 +47,13 @@ function MainController() {
     // $('#automatic').click(() => engageAutomaticMode(false, sse));
     // $('#manual').click(() => engageAutomaticMode(true, sse));
     function stopUltrasonicRequest(){
-        return sseUltrasonic.close();
+        return vm.sseUltrasonic.close();
     }
 
     function ultrasonicSourceCreator(){
         console.log('inside ultrasonic')
-        sseUltrasonic = new EventSource('http://192.168.1.83/my_event_source');
-        sseUltrasonic.onmessage = function(message) {
+        vm.sseUltrasonic = new EventSource('http://192.168.1.83/my_event_source');
+        vm.sseUltrasonic.onmessage = function(message) {
             console.log('ultrasonic message here');
             if (parseInt(message.data) < 8) {
                 console.error('too close');
