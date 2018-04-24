@@ -12,15 +12,15 @@ function MainController($http) {
     vm.sseUltrasonic;
 
     function killRequest() {
-        return $http.get( "/end_motor_source", function(data) {
-                        console.log('ending');
-                        $( ".result" ).html( data );
-                    });
+        return $http.get( "/end_motor_source").then(function(data) {
+            console.log('ending');
+            $( ".result" ).html( data );
+        });
     }
 
     function stopRequest(){
         vm.sse.close();
-        $.get( "/end_motor_source", function(data) {
+        $http.get( "/end_motor_source").then(function(data) {
             console.log('ending');
             $( ".result" ).html( data );
         });
