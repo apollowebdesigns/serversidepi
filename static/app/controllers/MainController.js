@@ -13,7 +13,9 @@ function MainController($scope, $http, $log, driveService) {
 
     vm.requestKiller = function () {
         driveService.sse.close();
-        return driveService.requestKiller();
+        return driveService.requestKiller().then(function () {
+            return driveService.sse.close();
+        });
     }
 
     function killRequest() {
@@ -30,7 +32,9 @@ function MainController($scope, $http, $log, driveService) {
             console.log('ending');
             $( ".result" ).html( data );
         });
-        return killRequest();
+        return killRequest().then(function() {
+            return 
+        });
     }
 
     function eventSourceCreator(direction){
