@@ -16,4 +16,8 @@ function driveService($http) {
                         $log.error('an error happened in the drive service');
                     });
     }
+
+    this.requestKiller = function() {
+        return $http.get( "/end_motor_source");
+    }
 }

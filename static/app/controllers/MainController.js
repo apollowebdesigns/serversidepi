@@ -11,6 +11,8 @@ function MainController($scope, $http, $log, driveService) {
     vm.sse1 
     vm.sseUltrasonic;
 
+    vm.requestKiller = driveService.requestKiller;
+
     function killRequest() {
         return driveService
                     .forwardsPromise()
