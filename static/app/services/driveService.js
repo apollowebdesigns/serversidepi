@@ -2,6 +2,11 @@ angular
     .module('app')
     .service('driveService', driveService);
 
-function driveService() {
-    this.serviceTest = 'hello from the service!';
+driveService.$inject = ['$http'];
+
+function driveService($http) {
+    this.sse = '';
+    this.forwardsPromise = function () {
+        return $http.get( "/end_motor_source");
+    }
 }

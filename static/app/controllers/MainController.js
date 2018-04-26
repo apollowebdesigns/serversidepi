@@ -7,21 +7,19 @@ MainController.$inject = ['$http', 'driveService'];
 function MainController($http, driveService) {
     var vm = this;
 
-    vm.serviceTest = driveService.serviceTest;
-
-    vm.sse; 
+    vm.sse = driveService.sse; 
     vm.sse1 
     vm.sseUltrasonic;
 
     function killRequest() {
-        return $http.get( "/end_motor_source").then(function(data) {
+        return driveService.forwardsPromise.then(function(data) {
             console.log('ending');
             $( ".result" ).html( data );
         });
     }
 
     function stopRequest(){
-        vm.sse.close();
+        driveService.sse.close();
         $http.get( "/end_motor_source").then(function(data) {
             console.log('ending');
             $( ".result" ).html( data );
@@ -30,8 +28,8 @@ function MainController($http, driveService) {
     }
 
     function eventSourceCreator(direction){
-        vm.sse = new EventSource(direction);
-        vm.sse.onmessage = function(message) {
+        driveService.sse = new EventSource(direction);
+        driveService.sse.onmessage = function(message) {
             console.log('A message has arrived!');
             $('#output').append('<li>'+message.data+'</li>');
         }
