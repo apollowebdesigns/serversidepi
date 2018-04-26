@@ -70,7 +70,7 @@ function MainController($scope, $http, $log, driveService) {
     }
 
     vm.stop = function () {
-        return stopRequest;
+        return stopRequest();
     }
 
     vm.distance = function(){
