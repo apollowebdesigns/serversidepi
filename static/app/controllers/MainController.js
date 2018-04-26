@@ -13,7 +13,10 @@ function MainController($scope, $http, $log, driveService) {
 
     function killRequest() {
         return driveService
-                    .forwardsPromise();
+                    .forwardsPromise()
+                    .then(function() {
+                        console.log('killing the promise?');
+                    });
     }
 
     function stopRequest(){
