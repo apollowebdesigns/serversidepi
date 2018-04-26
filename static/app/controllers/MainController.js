@@ -2,10 +2,12 @@ angular
     .module('app')
     .controller('MainController', MainController);
 
-MainController.$inject = ['$http'];
+MainController.$inject = ['$http', 'driveService'];
 
-function MainController($http) {
+function MainController($http, driveService) {
     var vm = this;
+
+    vm.servicetest = driveService.servicetest;
 
     vm.sse; 
     vm.sse1 
