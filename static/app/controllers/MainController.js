@@ -2,9 +2,9 @@ angular
     .module('app')
     .controller('MainController', MainController);
 
-MainController.$inject = ['$http', 'driveService'];
+MainController.$inject = ['$scope', '$http', '$log', 'driveService'];
 
-function MainController($http, driveService) {
+function MainController($scope, $http, $log, driveService) {
     var vm = this;
 
     vm.sse = driveService.sse; 
@@ -12,10 +12,8 @@ function MainController($http, driveService) {
     vm.sseUltrasonic;
 
     function killRequest() {
-        return driveService.forwardsPromise.then(function(data) {
-            console.log('ending');
-            $( ".result" ).html( data );
-        });
+        return driveService
+                    .forwardsPromise;
     }
 
     function stopRequest(){
