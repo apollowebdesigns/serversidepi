@@ -13,7 +13,7 @@ function MainController($scope, $http, $log, driveService) {
 
     vm.requestKiller = function () {
         driveService.sse.close();
-        return driveService.requestKiller;
+        return driveService.requestKiller();
     }
 
     function killRequest() {
