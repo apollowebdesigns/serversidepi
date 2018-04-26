@@ -7,7 +7,7 @@ MainController.$inject = ['$http', 'driveService'];
 function MainController($http, driveService) {
     var vm = this;
 
-    vm.servicetest = driveService.servicetest;
+    vm.serviceTest = driveService.serviceTest;
 
     vm.sse; 
     vm.sse1 
