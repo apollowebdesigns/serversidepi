@@ -11,7 +11,10 @@ function MainController($scope, $http, $log, driveService) {
     vm.sse1 
     vm.sseUltrasonic;
 
-    vm.requestKiller = driveService.requestKiller;
+    vm.requestKiller = function () {
+        driveService.sse.close();
+        return driveService.requestKiller;
+    }
 
     function killRequest() {
         return driveService
