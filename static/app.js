@@ -143,7 +143,7 @@ $(document).ready(
 
             $('#stop').mouseup(stopRequest)
 
-            $('#distance').click(() => eventSourceCreator('/my_event_source'))
+            $('#distance').click(() => eventSourceCreator('/distance'))
             $('#ultrasonic').click(() => ultrasonicSourceCreator())
             $('#ultrasonicStop').click(() => stopUltrasonicRequest())
 
