@@ -80,7 +80,7 @@ def sensor_distance():
             arduino.digitalWrite(Motor1B,arduino.HIGH)
             arduino.digitalWrite(Motor2A,arduino.HIGH)
             arduino.digitalWrite(Motor2B,arduino.LOW)
-            gevent.sleep(0.2)
+            gevent.sleep(0.5)
 
             # Stop
             arduino.digitalWrite(Motor1A,arduino.LOW)
