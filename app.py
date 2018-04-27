@@ -74,7 +74,6 @@ def sensor_distance():
             arduino.digitalWrite(Motor2A,arduino.LOW)
             arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2B,arduino.LOW)
-            gevent.sleep(0.01)
 
             # Move Right
             arduino.digitalWrite(Motor1A,arduino.LOW)
@@ -88,10 +87,8 @@ def sensor_distance():
             arduino.digitalWrite(Motor2A,arduino.LOW)
             arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2B,arduino.LOW)
-            gevent.sleep(0.01)
-
             print('turn right')
-            
+
         gevent.sleep(0.2)
         yield 'data: %s\n\n' % msg
         count += 1
