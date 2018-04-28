@@ -103,7 +103,7 @@ $(document).ready(
                 sse = new EventSource(direction);
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
-                    $('#output').append('<li>'+message.data+'</li>');
+                    document.getElementById(output).innerHTML = JSON.stringify(message.data);
                 }
             }
 
