@@ -65,10 +65,20 @@ def sensor_distance():
         messageString = str(msg)
         
         if float(messageString) < 10:
+            arduino.digitalWrite(Motor1A,arduino.LOW)
+            arduino.digitalWrite(Motor2A,arduino.LOW)
+            arduino.digitalWrite(Motor1B,arduino.LOW)
+            arduino.digitalWrite(Motor2B,arduino.LOW)
+
             # Move Right
             arduino.digitalWrite(Motor1A,arduino.LOW)
             arduino.digitalWrite(Motor1B,arduino.HIGH)
             arduino.digitalWrite(Motor2A,arduino.HIGH)
+            arduino.digitalWrite(Motor2B,arduino.LOW)
+
+            arduino.digitalWrite(Motor1A,arduino.LOW)
+            arduino.digitalWrite(Motor2A,arduino.LOW)
+            arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2B,arduino.LOW)
 
         else:
