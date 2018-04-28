@@ -64,21 +64,11 @@ def sensor_distance():
         gevent.sleep(0.01)
         messageString = str(msg)
         
-        if float(messageString) < 10:
-            arduino.digitalWrite(Motor1A,arduino.LOW)
-            arduino.digitalWrite(Motor2A,arduino.LOW)
-            arduino.digitalWrite(Motor1B,arduino.LOW)
-            arduino.digitalWrite(Motor2B,arduino.LOW)
-
+        if float(messageString) < 16:
             # Move Right
             arduino.digitalWrite(Motor1A,arduino.LOW)
             arduino.digitalWrite(Motor1B,arduino.HIGH)
             arduino.digitalWrite(Motor2A,arduino.HIGH)
-            arduino.digitalWrite(Motor2B,arduino.LOW)
-
-            arduino.digitalWrite(Motor1A,arduino.LOW)
-            arduino.digitalWrite(Motor2A,arduino.LOW)
-            arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2B,arduino.LOW)
             yield 'data: %s\n\n' % msg
             count += 1
