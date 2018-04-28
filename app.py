@@ -80,6 +80,8 @@ def sensor_distance():
             arduino.digitalWrite(Motor2A,arduino.LOW)
             arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2B,arduino.LOW)
+            yield 'data: %s\n\n' % msg
+            count += 1
 
         else:
             # Forwards
@@ -87,9 +89,10 @@ def sensor_distance():
             arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2A,arduino.HIGH)
             arduino.digitalWrite(Motor2B,arduino.LOW)
+            yield 'data: %s\n\n' % msg
+            count += 1
 
-        yield 'data: %s\n\n' % msg
-        count += 1
+        
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
