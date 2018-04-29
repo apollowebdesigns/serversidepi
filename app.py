@@ -46,11 +46,12 @@ arduino.pinMode(Motor2B,arduino.OUTPUT)
 arduino.pinMode(TrigPin,arduino.OUTPUT)
 arduino.pinMode(EchoPin,arduino.INPUT)
 
-# For automatic mode
-messages = SSEClient('http://192.168.1.83/my_event_source')
-
 # Move the sensor forwards
 def sensor_distance():
+    
+    # For automatic mode
+    messages = SSEClient('http://192.168.1.83/my_event_source')
+
     arduino.digitalWrite(Motor1A,arduino.LOW)
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
