@@ -62,7 +62,6 @@ def sensor_distance():
     for msg in messages:
         print('automatic message?')
         print(msg)
-        gevent.sleep(0.01)
         messageString = str(msg)
         
         if float(messageString) < 16:
@@ -71,6 +70,7 @@ def sensor_distance():
             arduino.digitalWrite(Motor1B,arduino.HIGH)
             arduino.digitalWrite(Motor2A,arduino.HIGH)
             arduino.digitalWrite(Motor2B,arduino.LOW)
+            gevent.sleep(0.2)
             yield 'data: %s\n\n' % msg
             count += 1
 
@@ -80,6 +80,7 @@ def sensor_distance():
             arduino.digitalWrite(Motor1B,arduino.LOW)
             arduino.digitalWrite(Motor2A,arduino.HIGH)
             arduino.digitalWrite(Motor2B,arduino.LOW)
+            gevent.sleep(0.2)
             yield 'data: %s\n\n' % msg
             count += 1
 
