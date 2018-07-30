@@ -8,8 +8,8 @@ from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 from sense_hat import SenseHat
 from sseclient import SSEClient
-import forwardsarrow
-import backwardsarrow
+# import forwardsarrow
+# import backwardsarrow
 
 app = Flask(__name__)
 
@@ -48,7 +48,7 @@ arduino.pinMode(EchoPin,arduino.INPUT)
 
 # Move the sensor forwards
 def sensor_distance():
-    
+
     # For automatic mode
     messages = SSEClient('http://192.168.1.83/my_event_source')
 
@@ -56,14 +56,14 @@ def sensor_distance():
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
-    forwardsarrow.forwards()
+    # forwardsarrow.forwards()
     count = 0
 
     for msg in messages:
         print('automatic message?')
         print(msg)
         messageString = str(msg)
-        
+
         if float(messageString) < 16:
             # Move Right
             arduino.digitalWrite(Motor1A,arduino.LOW)
@@ -84,7 +84,7 @@ def sensor_distance():
             yield 'data: %s\n\n' % msg
             count += 1
 
-        
+
 
 def kill_motors():
     arduino.digitalWrite(Motor1A,arduino.LOW)
@@ -97,7 +97,7 @@ def event_stream():
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
-    forwardsarrow.forwards()
+    # forwardsarrow.forwards()
     count = 0
     while True:
         gevent.sleep(0.01)
@@ -113,7 +113,7 @@ def move_backwards():
     arduino.digitalWrite(Motor2A,arduino.LOW)
     arduino.digitalWrite(Motor1B,arduino.LOW)
     arduino.digitalWrite(Motor2B,arduino.LOW)
-    backwardsarrow.backwards()
+    # backwardsarrow.backwards()
     count = 0
     while True:
         gevent.sleep(0.01)
