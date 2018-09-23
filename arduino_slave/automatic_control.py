@@ -5,6 +5,7 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
 from sseclient import SSEClient
+import logging
 
 class AutomaticControl:
     TrigPin = 9
@@ -18,7 +19,7 @@ class AutomaticControl:
         print(distance)
         if distance < 5:
             # stop and turn
-            print('turn')
+            logging.info('turn')
         else:
             # keep going
-            print('keep going')
+            logging.info('keep going')

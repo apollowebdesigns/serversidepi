@@ -6,6 +6,7 @@ from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from sseclient import SSEClient
 from arduino_slave import automatic_control
+import logging
 
 class ArduinoSlave(automatic_control.AutomaticControl):
     """Arduino slave construction setup"""
