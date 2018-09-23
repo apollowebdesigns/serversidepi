@@ -14,9 +14,6 @@ class ArduinoSlave(automatic_control.AutomaticControl):
     Motor2A = 4
     Motor2B = 5
 
-    TrigPin = 9
-    EchoPin = 10
-
     def __init__(self, connection_path):
         try:
             connection = SerialManager(connection_path)
