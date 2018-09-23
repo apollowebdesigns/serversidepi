@@ -34,129 +34,129 @@ EchoPin = 10
 
 
 # Connecting to the Arduino
-try:
-    connection = SerialManager()
-    arduino = ArduinoApi(connection = connection)
-except:
-    print("Failed to connect to the arduino")
+# try:
+#     connection = SerialManager()
+#     arduino = ArduinoApi(connection = connection)
+# except:
+#     print("Failed to connect to the arduino")
 
 # Motors set up
-arduino.pinMode(Motor1A,arduino.OUTPUT)
-arduino.pinMode(Motor1B,arduino.OUTPUT)
-arduino.pinMode(Motor2A,arduino.OUTPUT)
-arduino.pinMode(Motor2B,arduino.OUTPUT)
+# arduino.pinMode(Motor1A,arduino.OUTPUT)
+# arduino.pinMode(Motor1B,arduino.OUTPUT)
+# arduino.pinMode(Motor2A,arduino.OUTPUT)
+# arduino.pinMode(Motor2B,arduino.OUTPUT)
 
 # Sensor set up
-arduino.pinMode(TrigPin,arduino.OUTPUT)
-arduino.pinMode(EchoPin,arduino.INPUT)
+# arduino.pinMode(TrigPin,arduino.OUTPUT)
+# arduino.pinMode(EchoPin,arduino.INPUT)
 
 # Move the sensor forwards
-def sensor_distance():
+# def sensor_distance():
 
-    # For automatic mode
-    messages = SSEClient('http://192.168.1.83/my_event_source')
+#     # For automatic mode
+#     messages = SSEClient('http://192.168.1.83/my_event_source')
 
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    # forwardsarrow.forwards()
-    count = 0
+#     arduino.digitalWrite(Motor1A,arduino.LOW)
+#     arduino.digitalWrite(Motor2A,arduino.LOW)
+#     arduino.digitalWrite(Motor1B,arduino.LOW)
+#     arduino.digitalWrite(Motor2B,arduino.LOW)
+#     # forwardsarrow.forwards()
+#     count = 0
 
-    for msg in messages:
-        print('automatic message?')
-        print(msg)
-        messageString = str(msg)
+#     for msg in messages:
+#         print('automatic message?')
+#         print(msg)
+#         messageString = str(msg)
 
-        if float(messageString) < 16:
-            # Move Right
-            arduino.digitalWrite(Motor1A,arduino.LOW)
-            arduino.digitalWrite(Motor1B,arduino.HIGH)
-            arduino.digitalWrite(Motor2A,arduino.HIGH)
-            arduino.digitalWrite(Motor2B,arduino.LOW)
-            gevent.sleep(0.2)
-            yield 'data: %s\n\n' % msg
-            count += 1
+#         if float(messageString) < 16:
+#             # Move Right
+#             arduino.digitalWrite(Motor1A,arduino.LOW)
+#             arduino.digitalWrite(Motor1B,arduino.HIGH)
+#             arduino.digitalWrite(Motor2A,arduino.HIGH)
+#             arduino.digitalWrite(Motor2B,arduino.LOW)
+#             gevent.sleep(0.2)
+#             yield 'data: %s\n\n' % msg
+#             count += 1
 
-        else:
-            # Forwards
-            arduino.digitalWrite(Motor1A,arduino.HIGH)
-            arduino.digitalWrite(Motor1B,arduino.LOW)
-            arduino.digitalWrite(Motor2A,arduino.HIGH)
-            arduino.digitalWrite(Motor2B,arduino.LOW)
-            gevent.sleep(0.2)
-            yield 'data: %s\n\n' % msg
-            count += 1
+#         else:
+#             # Forwards
+#             arduino.digitalWrite(Motor1A,arduino.HIGH)
+#             arduino.digitalWrite(Motor1B,arduino.LOW)
+#             arduino.digitalWrite(Motor2A,arduino.HIGH)
+#             arduino.digitalWrite(Motor2B,arduino.LOW)
+#             gevent.sleep(0.2)
+#             yield 'data: %s\n\n' % msg
+#             count += 1
 
 
 
-def kill_motors():
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
+# def kill_motors():
+#     arduino.digitalWrite(Motor1A,arduino.LOW)
+#     arduino.digitalWrite(Motor2A,arduino.LOW)
+#     arduino.digitalWrite(Motor1B,arduino.LOW)
+#     arduino.digitalWrite(Motor2B,arduino.LOW)
 
-def event_stream():
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    # forwardsarrow.forwards()
-    count = 0
-    while True:
-        gevent.sleep(0.01)
-        arduino.digitalWrite(Motor1A,arduino.HIGH)
-        arduino.digitalWrite(Motor1B,arduino.LOW)
-        arduino.digitalWrite(Motor2A,arduino.HIGH)
-        arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % count
-        count += 1
+# def event_stream():
+#     arduino.digitalWrite(Motor1A,arduino.LOW)
+#     arduino.digitalWrite(Motor2A,arduino.LOW)
+#     arduino.digitalWrite(Motor1B,arduino.LOW)
+#     arduino.digitalWrite(Motor2B,arduino.LOW)
+#     # forwardsarrow.forwards()
+#     count = 0
+#     while True:
+#         gevent.sleep(0.01)
+#         arduino.digitalWrite(Motor1A,arduino.HIGH)
+#         arduino.digitalWrite(Motor1B,arduino.LOW)
+#         arduino.digitalWrite(Motor2A,arduino.HIGH)
+#         arduino.digitalWrite(Motor2B,arduino.LOW)
+#         yield 'data: %s\n\n' % count
+#         count += 1
 
-def move_backwards():
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    # backwardsarrow.backwards()
-    count = 0
-    while True:
-        gevent.sleep(0.01)
-        arduino.digitalWrite(Motor1A,arduino.LOW)
-        arduino.digitalWrite(Motor1B,arduino.HIGH)
-        arduino.digitalWrite(Motor2A,arduino.LOW)
-        arduino.digitalWrite(Motor2B,arduino.HIGH)
-        yield 'data: %s\n\n' % count
-        count += 1
+# def move_backwards():
+#     arduino.digitalWrite(Motor1A,arduino.LOW)
+#     arduino.digitalWrite(Motor2A,arduino.LOW)
+#     arduino.digitalWrite(Motor1B,arduino.LOW)
+#     arduino.digitalWrite(Motor2B,arduino.LOW)
+#     # backwardsarrow.backwards()
+#     count = 0
+#     while True:
+#         gevent.sleep(0.01)
+#         arduino.digitalWrite(Motor1A,arduino.LOW)
+#         arduino.digitalWrite(Motor1B,arduino.HIGH)
+#         arduino.digitalWrite(Motor2A,arduino.LOW)
+#         arduino.digitalWrite(Motor2B,arduino.HIGH)
+#         yield 'data: %s\n\n' % count
+#         count += 1
 
-def move_right():
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    count = 0
-    while True:
-        gevent.sleep(0.01)
-        arduino.digitalWrite(Motor1A,arduino.LOW)
-        arduino.digitalWrite(Motor1B,arduino.HIGH)
-        arduino.digitalWrite(Motor2A,arduino.HIGH)
-        arduino.digitalWrite(Motor2B,arduino.LOW)
-        yield 'data: %s\n\n' % count
-        count += 1
+# def move_right():
+#     arduino.digitalWrite(Motor1A,arduino.LOW)
+#     arduino.digitalWrite(Motor2A,arduino.LOW)
+#     arduino.digitalWrite(Motor1B,arduino.LOW)
+#     arduino.digitalWrite(Motor2B,arduino.LOW)
+#     count = 0
+#     while True:
+#         gevent.sleep(0.01)
+#         arduino.digitalWrite(Motor1A,arduino.LOW)
+#         arduino.digitalWrite(Motor1B,arduino.HIGH)
+#         arduino.digitalWrite(Motor2A,arduino.HIGH)
+#         arduino.digitalWrite(Motor2B,arduino.LOW)
+#         yield 'data: %s\n\n' % count
+#         count += 1
 
-def move_left():
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    count = 0
-    while True:
-        gevent.sleep(0.01)
-        arduino.digitalWrite(Motor1A,arduino.HIGH)
-        arduino.digitalWrite(Motor1B,arduino.LOW)
-        arduino.digitalWrite(Motor2A,arduino.LOW)
-        arduino.digitalWrite(Motor2B,arduino.HIGH)
-        yield 'data: %s\n\n' % count
-        count += 1
+# def move_left():
+#     arduino.digitalWrite(Motor1A,arduino.LOW)
+#     arduino.digitalWrite(Motor2A,arduino.LOW)
+#     arduino.digitalWrite(Motor1B,arduino.LOW)
+#     arduino.digitalWrite(Motor2B,arduino.LOW)
+#     count = 0
+#     while True:
+#         gevent.sleep(0.01)
+#         arduino.digitalWrite(Motor1A,arduino.HIGH)
+#         arduino.digitalWrite(Motor1B,arduino.LOW)
+#         arduino.digitalWrite(Motor2A,arduino.LOW)
+#         arduino.digitalWrite(Motor2B,arduino.HIGH)
+#         yield 'data: %s\n\n' % count
+#         count += 1
 
 def event_end():
     count = 0
