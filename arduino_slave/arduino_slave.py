@@ -5,8 +5,9 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from sseclient import SSEClient
+from automatic_control import AutomaticControl
 
-class ArduinoSlave:
+class ArduinoSlave(AutomaticControl):
     """Arduino slave construction setup"""
     Motor1A = 2
     Motor1B = 3
@@ -52,6 +53,9 @@ class ArduinoSlave:
             self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
+            
+            # distance test when moving forwards
+            self.get_distance()
             yield 'data: %s\n\n' % count
             count += 1
 
