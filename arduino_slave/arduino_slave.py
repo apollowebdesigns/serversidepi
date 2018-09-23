@@ -5,9 +5,9 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from sseclient import SSEClient
-from automatic_control import AutomaticControl
+from arduino_slave import automatic_control
 
-class ArduinoSlave(AutomaticControl):
+class ArduinoSlave(automatic_control.AutomaticControl):
     """Arduino slave construction setup"""
     Motor1A = 2
     Motor1B = 3
