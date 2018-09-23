@@ -104,6 +104,7 @@ $(document).ready(
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
                     document.getElementById('output').innerHTML = JSON.stringify(message.data);
+                    console.log(message.data);
                 }
             }
 

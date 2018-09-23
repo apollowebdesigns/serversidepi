@@ -16,10 +16,4 @@ class AutomaticControl:
 
     def get_distance(self):
         distance = self.ultrasonic.get_distance()
-        print(distance)
-        if distance < 5:
-            # stop and turn
-            logging.info('turn')
-        else:
-            # keep going
-            logging.info('keep going')
+        return distance
