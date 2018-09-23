@@ -8,6 +8,7 @@ from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 from sense_hat import SenseHat
 from sseclient import SSEClient
+from arduino_slave.arduino_slave import ArduinoSlave
 # import forwardsarrow
 # import backwardsarrow
 
@@ -15,6 +16,9 @@ app = Flask(__name__)
 
 # Allow CORS for client to access server sent events
 CORS(app)
+
+# research slave connection!
+arduino_slave = ArduinoSlave('/dev/ttyACM0')
 
 Motor1A = 2
 Motor1B = 3
@@ -157,7 +161,7 @@ def move_left():
 def event_end():
     count = 0
     while True:
-        gevent.sleep(0.1);
+        gevent.sleep(0.1)
         yield 'data: %s\n\n' % count
         count = 0
 
@@ -170,39 +174,39 @@ def sse_sensor_distance():
 @app.route('/my_event_source')
 def sse_request():
     return Response(
-            event_stream(),
+            arduino_slave.event_stream(),
             mimetype='text/event-stream')
 
 @app.route('/backwards')
 def sse_backwards():
     return Response(
-            move_backwards(),
+            arduino_slave.move_backwards(),
             mimetype='text/event-stream')
 
 @app.route('/right')
 def sse_right():
     return Response(
-            move_right(),
+            arduino_slave.move_right(),
             mimetype='text/event-stream')
 
 @app.route('/left')
 def sse_left():
     return Response(
-            move_left(),
+            arduino_slave.move_left(),
             mimetype='text/event-stream')
 
 @app.route('/end_motor_source')
 def event_end():
-    arduino.pinMode(Motor1A,arduino.OUTPUT)
-    arduino.pinMode(Motor1B,arduino.OUTPUT)
-    arduino.pinMode(Motor2A,arduino.OUTPUT)
-    arduino.pinMode(Motor2B,arduino.OUTPUT)
+    # arduino.pinMode(Motor1A,arduino.OUTPUT)
+    # arduino.pinMode(Motor1B,arduino.OUTPUT)
+    # arduino.pinMode(Motor2A,arduino.OUTPUT)
+    # arduino.pinMode(Motor2B,arduino.OUTPUT)
 
-    arduino.digitalWrite(Motor1A,arduino.LOW)
-    arduino.digitalWrite(Motor2A,arduino.LOW)
-    arduino.digitalWrite(Motor1B,arduino.LOW)
-    arduino.digitalWrite(Motor2B,arduino.LOW)
-    kill_motors()
+    # arduino.digitalWrite(Motor1A,arduino.LOW)
+    # arduino.digitalWrite(Motor2A,arduino.LOW)
+    # arduino.digitalWrite(Motor1B,arduino.LOW)
+    # arduino.digitalWrite(Motor2B,arduino.LOW)
+    arduino_slave.kill_motors()
     sense = SenseHat()
     sense.clear()
     print('entered!!')
