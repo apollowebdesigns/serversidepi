@@ -20,31 +20,9 @@ CORS(app)
 # research slave connection!
 arduino_slave = ArduinoSlave('/dev/ttyACM0')
 
-Motor1A = 2
-Motor1B = 3
-Motor2A = 4
-Motor2B = 5
-
-# Using distance sensor
-
-TrigPin = 9
-EchoPin = 10
-
 # Init vars for distance sensing
 
 
-# Connecting to the Arduino
-# try:
-#     connection = SerialManager()
-#     arduino = ArduinoApi(connection = connection)
-# except:
-#     print("Failed to connect to the arduino")
-
-# Motors set up
-# arduino.pinMode(Motor1A,arduino.OUTPUT)
-# arduino.pinMode(Motor1B,arduino.OUTPUT)
-# arduino.pinMode(Motor2A,arduino.OUTPUT)
-# arduino.pinMode(Motor2B,arduino.OUTPUT)
 
 # Sensor set up
 # arduino.pinMode(TrigPin,arduino.OUTPUT)
@@ -89,75 +67,6 @@ EchoPin = 10
 #             count += 1
 
 
-
-# def kill_motors():
-#     arduino.digitalWrite(Motor1A,arduino.LOW)
-#     arduino.digitalWrite(Motor2A,arduino.LOW)
-#     arduino.digitalWrite(Motor1B,arduino.LOW)
-#     arduino.digitalWrite(Motor2B,arduino.LOW)
-
-# def event_stream():
-#     arduino.digitalWrite(Motor1A,arduino.LOW)
-#     arduino.digitalWrite(Motor2A,arduino.LOW)
-#     arduino.digitalWrite(Motor1B,arduino.LOW)
-#     arduino.digitalWrite(Motor2B,arduino.LOW)
-#     # forwardsarrow.forwards()
-#     count = 0
-#     while True:
-#         gevent.sleep(0.01)
-#         arduino.digitalWrite(Motor1A,arduino.HIGH)
-#         arduino.digitalWrite(Motor1B,arduino.LOW)
-#         arduino.digitalWrite(Motor2A,arduino.HIGH)
-#         arduino.digitalWrite(Motor2B,arduino.LOW)
-#         yield 'data: %s\n\n' % count
-#         count += 1
-
-# def move_backwards():
-#     arduino.digitalWrite(Motor1A,arduino.LOW)
-#     arduino.digitalWrite(Motor2A,arduino.LOW)
-#     arduino.digitalWrite(Motor1B,arduino.LOW)
-#     arduino.digitalWrite(Motor2B,arduino.LOW)
-#     # backwardsarrow.backwards()
-#     count = 0
-#     while True:
-#         gevent.sleep(0.01)
-#         arduino.digitalWrite(Motor1A,arduino.LOW)
-#         arduino.digitalWrite(Motor1B,arduino.HIGH)
-#         arduino.digitalWrite(Motor2A,arduino.LOW)
-#         arduino.digitalWrite(Motor2B,arduino.HIGH)
-#         yield 'data: %s\n\n' % count
-#         count += 1
-
-# def move_right():
-#     arduino.digitalWrite(Motor1A,arduino.LOW)
-#     arduino.digitalWrite(Motor2A,arduino.LOW)
-#     arduino.digitalWrite(Motor1B,arduino.LOW)
-#     arduino.digitalWrite(Motor2B,arduino.LOW)
-#     count = 0
-#     while True:
-#         gevent.sleep(0.01)
-#         arduino.digitalWrite(Motor1A,arduino.LOW)
-#         arduino.digitalWrite(Motor1B,arduino.HIGH)
-#         arduino.digitalWrite(Motor2A,arduino.HIGH)
-#         arduino.digitalWrite(Motor2B,arduino.LOW)
-#         yield 'data: %s\n\n' % count
-#         count += 1
-
-# def move_left():
-#     arduino.digitalWrite(Motor1A,arduino.LOW)
-#     arduino.digitalWrite(Motor2A,arduino.LOW)
-#     arduino.digitalWrite(Motor1B,arduino.LOW)
-#     arduino.digitalWrite(Motor2B,arduino.LOW)
-#     count = 0
-#     while True:
-#         gevent.sleep(0.01)
-#         arduino.digitalWrite(Motor1A,arduino.HIGH)
-#         arduino.digitalWrite(Motor1B,arduino.LOW)
-#         arduino.digitalWrite(Motor2A,arduino.LOW)
-#         arduino.digitalWrite(Motor2B,arduino.HIGH)
-#         yield 'data: %s\n\n' % count
-#         count += 1
-
 def event_end():
     count = 0
     while True:
@@ -197,15 +106,6 @@ def sse_left():
 
 @app.route('/end_motor_source')
 def event_end():
-    # arduino.pinMode(Motor1A,arduino.OUTPUT)
-    # arduino.pinMode(Motor1B,arduino.OUTPUT)
-    # arduino.pinMode(Motor2A,arduino.OUTPUT)
-    # arduino.pinMode(Motor2B,arduino.OUTPUT)
-
-    # arduino.digitalWrite(Motor1A,arduino.LOW)
-    # arduino.digitalWrite(Motor2A,arduino.LOW)
-    # arduino.digitalWrite(Motor1B,arduino.LOW)
-    # arduino.digitalWrite(Motor2B,arduino.LOW)
     arduino_slave.kill_motors()
     sense = SenseHat()
     sense.clear()
