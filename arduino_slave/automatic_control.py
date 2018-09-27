@@ -7,6 +7,7 @@ from time import sleep
 from sseclient import SSEClient
 import logging
 
+
 class AutomaticControl:
     TrigPin = 9
     EchoPin = 10
