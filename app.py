@@ -9,6 +9,7 @@ from flask_cors import CORS
 # from sense_hat import SenseHat
 from sseclient import SSEClient
 from arduino_slave.arduino_slave import ArduinoSlave
+logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
 
 # import forwardsarrow
@@ -109,6 +110,7 @@ def sse_left():
 @app.route('/end_motor_source')
 def event_end():
     arduino_slave.kill_motors()
+    logging.debug('hit?')
     # sense = SenseHat()
     # sense.clear()
     print('entered!!')
