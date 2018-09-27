@@ -6,6 +6,7 @@ from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
 from sseclient import SSEClient
 import logging
+logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
 class AutomaticControl:
     TrigPin = 9
