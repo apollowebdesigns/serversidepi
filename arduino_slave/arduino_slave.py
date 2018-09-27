@@ -7,6 +7,7 @@ from time import sleep
 from sseclient import SSEClient
 from arduino_slave import automatic_control
 import logging
+logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
 class ArduinoSlave(automatic_control.AutomaticControl):
     """Arduino slave construction setup"""
@@ -20,7 +21,7 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             connection = SerialManager(connection_path)
             self.arduino = ArduinoApi(connection = connection)
         except:
-            print("Failed to connect to the arduino")
+            logging.debug("Failed to connect to the arduino")
 
         # Motors set up
         self.arduino.pinMode(self.Motor1A,self.arduino.OUTPUT)
