@@ -7,7 +7,7 @@ from time import sleep
 from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 # from sense_hat import SenseHat
-from sseclient import SSEClient
+# from sseclient import SSEClient
 from arduino_slave.arduino_slave import ArduinoSlave
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
@@ -78,11 +78,11 @@ def event_end():
         yield 'data: %s\n\n' % count
         count = 0
 
-@app.route('/distance')
-def sse_sensor_distance():
-    return Response(
-            sensor_distance(),
-            mimetype='text/event-stream')
+# @app.route('/distance')
+# def sse_sensor_distance():
+#     return Response(
+#             sensor_distance(),
+#             mimetype='text/event-stream')
 
 @app.route('/my_event_source')
 def sse_request():

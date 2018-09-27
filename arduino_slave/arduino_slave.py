@@ -4,7 +4,6 @@ from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
-from sseclient import SSEClient
 from arduino_slave import automatic_control
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
