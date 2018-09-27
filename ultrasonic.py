@@ -6,7 +6,7 @@ from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from flask import Flask, request, Response, render_template
 from flask_cors import CORS
-from sense_hat import SenseHat
+# from sense_hat import SenseHat
 import forwardsarrow
 import backwardsarrow
 

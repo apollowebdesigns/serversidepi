@@ -109,8 +109,8 @@ def sse_left():
 @app.route('/end_motor_source')
 def event_end():
     arduino_slave.kill_motors()
-    sense = SenseHat()
-    sense.clear()
+    # sense = SenseHat()
+    # sense.clear()
     print('entered!!')
     return 'end'
 
