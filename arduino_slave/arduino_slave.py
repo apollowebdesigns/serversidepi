@@ -54,7 +54,9 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
             
             # distance test when moving forwards
+            logging.debug("logging some distance")
             distance = self.get_distance()
+            logging.debug(distance)
             yield distance + ' data: %s\n\n' % count
             count += 1
 
@@ -71,7 +73,9 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
+            logging.debug("Backwards")
             distance = self.get_distance()
+            logging.debug("distance")
             yield distance + ' data: %s\n\n' % count
             count += 1
 
