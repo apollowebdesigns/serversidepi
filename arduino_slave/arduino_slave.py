@@ -90,7 +90,7 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
-            yield distance + ' data: %s\n\n' % count
+            yield ' data: %s\n\n' % count
             count += 1
 
     def move_left(self):
@@ -105,5 +105,5 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
-            yield distance + ' data: %s\n\n' % count
+            yield ' data: %s\n\n' % count
             count += 1
