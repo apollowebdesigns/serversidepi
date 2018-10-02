@@ -56,7 +56,7 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             logging.debug("logging some distance")
             distance = self.get_distance()
             logging.debug(distance)
-            yield distance + ' data: %s\n\n' % count
+            yield  'data: %s\n\n' % distance
             count += 1
 
     def move_backwards(self):
@@ -75,7 +75,7 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             logging.debug("Backwards")
             distance = self.get_distance()
             logging.debug("distance")
-            yield distance + ' data: %s\n\n' % count
+            yield 'data: %s\n\n' % distance
             count += 1
 
     def move_right(self):
