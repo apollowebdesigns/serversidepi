@@ -17,4 +17,4 @@ class AutomaticControl:
 
     def get_distance(self):
         distance = self.ultrasonic.get_distance()
-        return distance
+        return str(distance)

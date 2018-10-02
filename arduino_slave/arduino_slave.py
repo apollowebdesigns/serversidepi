@@ -51,8 +51,11 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
             
             # distance test when moving forwards
-            distance = self.get_distance()
-            yield  'data: %s\n\n' % distance
+            try:
+                distance = self.get_distance()
+                yield 'data: ' + distance + '\n\n'
+            except:
+                yield 'data: there was an error!\n\n'
             count += 1
 
     def move_backwards(self):
@@ -68,8 +71,11 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
-            distance = self.get_distance()
-            yield 'data: %s\n\n' % distance
+            try:
+                distance = self.get_distance()
+                yield 'data: ' + distance + '\n\n'
+            except:
+                yield 'data: there was an error!\n\n'
             count += 1
 
     def move_right(self):
