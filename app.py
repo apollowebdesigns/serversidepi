@@ -71,12 +71,12 @@ arduino_slave = ArduinoSlave('/dev/ttyACM0')
 #             count += 1
 
 
-def event_end():
-    count = 0
-    while True:
-        gevent.sleep(0.1)
-        yield 'data: %s\n\n' % count
-        count = 0
+# def event_end():
+#     count = 0
+#     while True:
+#         gevent.sleep(0.1)
+#         yield 'data: %s\n\n' % count
+#         count = 0
 
 # @app.route('/distance')
 # def sse_sensor_distance():

@@ -101,10 +101,17 @@ $(document).ready(
 
             function eventSourceCreator(direction){
                 sse = new EventSource(direction);
+                console.log('generating the event source for ' + direction);
+                console.log('the ready state is: ' + sse.readyState);
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
                     document.getElementById('output').innerHTML = JSON.stringify(message.data);
                     console.log(message.data);
+                }
+                sse.onerror = function(err) {
+                    console.error('There has been an error!!');
+                    document.getElementById('output').innerHTML = JSON.stringify(err);
+                    console.error(message.data);
                 }
             }
 
