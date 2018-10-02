@@ -8,7 +8,7 @@ from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 # from sense_hat import SenseHat
 # from sseclient import SSEClient
-from arduino_slave.arduino_slave import ArduinoSlave
+from arduino_slave import ArduinoSlave
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
