@@ -41,3 +41,11 @@ http://pymysql.readthedocs.io/en/latest/user/examples.html
 TOTO: integrate this
 
 https://www.pyimagesearch.com/2017/12/18/keras-deep-learning-raspberry-pi/
+
+## Server sent event information
+
+Always prefix a sse response with:
+
+```
+'data: insert a random string'
+```
