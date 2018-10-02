@@ -103,6 +103,11 @@ $(document).ready(
                 sse = new EventSource(direction);
                 console.log('generating the event source for ' + direction);
                 console.log('the ready state is: ' + sse.readyState);
+                sse.addEventListener = ('data', function(e) {
+                    targetContainer.innerHTML = e.data;
+                    console.log('inside the data function');
+                    JSON.stringify(console.log(e));
+                });
                 sse.onmessage = function(message) {
                     console.log('A message has arrived!');
                     document.getElementById('output').innerHTML = JSON.stringify(message.data);
