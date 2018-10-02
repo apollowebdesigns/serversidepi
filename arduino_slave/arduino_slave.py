@@ -8,6 +8,26 @@ from arduino_slave import automatic_control
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
+class ServerSentEvent(object):
+
+    def __init__(self, data):
+        self.data = data
+        self.event = None
+        self.id = None
+        self.desc_map = {
+            self.data : "data",
+            self.event : "event",
+            self.id : "id"
+        }
+
+    def encode(self):
+        if not self.data:
+            return ""
+        lines = ["%s: %s" % (v, k) 
+                 for k, v in self.desc_map.iteritems() if k]
+        
+        return "%s\n\n" % "\n".join(lines)
+
 class ArduinoSlave(automatic_control.AutomaticControl):
     """Arduino slave construction setup"""
     Motor1A = 2
@@ -90,7 +110,8 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
-            yield ' data: %s\n\n' % count
+            retunedValue = ServerSentEvent(' data: %s\n\n' % count)
+            yield retunedValue.encode()
             count += 1
 
     def move_left(self):
@@ -105,5 +126,6 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
-            yield ' data: %s\n\n' % count
+            retunedValue = ServerSentEvent(' data: %s\n\n' % count)
+            yield retunedValue.encode()
             count += 1
