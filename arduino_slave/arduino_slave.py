@@ -5,8 +5,6 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from arduino_slave import automatic_control
-import logging
-logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
 class ArduinoSlave(automatic_control.AutomaticControl):
     """Arduino slave construction setup"""
@@ -20,7 +18,7 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             connection = SerialManager(connection_path)
             self.arduino = ArduinoApi(connection = connection)
         except:
-            logging.debug("Failed to connect to the arduino")
+            print("Failed to connect to the arduino")
 
         # Motors set up
         self.arduino.pinMode(self.Motor1A,self.arduino.OUTPUT)
@@ -53,9 +51,9 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
             
             # distance test when moving forwards
-            logging.debug("logging some distance")
+            print("logging some distance")
             distance = self.get_distance()
-            logging.debug(distance)
+            print(distance)
             yield  'data: %s\n\n' % distance
             count += 1
 
@@ -72,9 +70,9 @@ class ArduinoSlave(automatic_control.AutomaticControl):
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
-            logging.debug("Backwards")
+            print("Backwards")
             distance = self.get_distance()
-            logging.debug("distance")
+            print("distance")
             yield 'data: %s\n\n' % distance
             count += 1
 
