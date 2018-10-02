@@ -1,12 +1,16 @@
+import os.path
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 import gevent
 import gevent.monkey
 from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
-from arduino_slave import automatic_control
+from automatic_control import AutomaticControl
 
-class ArduinoSlave(automatic_control.AutomaticControl):
+class ArduinoSlave(AutomaticControl):
     """Arduino slave construction setup"""
     Motor1A = 2
     Motor1B = 3
