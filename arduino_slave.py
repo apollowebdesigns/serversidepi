@@ -2,16 +2,23 @@ import gevent
 import gevent.monkey
 from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
-from nanpy import (ArduinoApi, SerialManager)
+from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
-from automatic_control import AutomaticControl
 
-class ArduinoSlave(AutomaticControl):
+class ArduinoSlave():
     """Arduino slave construction setup"""
     Motor1A = 2
     Motor1B = 3
     Motor2A = 4
     Motor2B = 5
+
+    TrigPin = 9
+    EchoPin = 10
+        
+
+    def get_distance(self):
+        distance = self.ultrasonic.get_distance()
+        return str(distance)
 
     def __init__(self, connection_path):
         try:
@@ -19,6 +26,8 @@ class ArduinoSlave(AutomaticControl):
             self.arduino = ArduinoApi(connection = connection)
         except:
             print("Failed to connect to the arduino")
+
+        self.ultrasonic = Ultrasonic(self.EchoPin, self.TrigPin, False, connection=connection)
 
         # Motors set up
         self.arduino.pinMode(self.Motor1A,self.arduino.OUTPUT)
