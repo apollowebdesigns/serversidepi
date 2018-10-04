@@ -14,6 +14,8 @@ class ArduinoSlave():
 
     TrigPin = 9
     EchoPin = 10
+
+    ultrasonic = ''
         
 
     def get_distance(self):
