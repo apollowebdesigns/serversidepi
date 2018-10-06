@@ -1,41 +1,18 @@
-import gevent
-import gevent.monkey
-from gevent.pywsgi import WSGIServer
-gevent.monkey.patch_all()
-from nanpy import (ArduinoApi, SerialManager)
-from time import sleep
-from flask import Flask, request, Response, render_template
-from flask_cors import CORS
-# from sense_hat import SenseHat
-import forwardsarrow
-import backwardsarrow
+import serial #Import Serial Library
+import signal
 
-# Using distance sensor
+# current address of arduino on which serial port
+arduinoSerialData = serial.Serial('/dev/ttyACM0',9600) #Create Serial port object called arduinoSerialData
 
-TrigPin = 9
-EchoPin = 10
+class SerialClass:
+    go = True
 
-duration = 0
-distance = 0
-
-try:
-    connection = SerialManager()
-    arduino = ArduinoApi(connection = connection)
-except:
-    print("Failed to connect to the arduino")
-
-# Sensor set up
-arduino.pinMode(TrigPin,arduino.OUTPUT)
-arduino.pinMode(EchoPin,arduino.INPUT)
-
-while True:
-    arduino.digitalWrite(TrigPin, arduino.LOW)
-    sleep(0.02)
-    arduino.digitalWrite(TrigPin, arduino.HIGH)
-    sleep(0.1)
-    arduino.digitalWrite(TrigPin, arduino.LOW)
-    duration = arduino.pulseIn(EchoPin, arduino.HIGH);
-    distance = (duration*0.0343)/2;
-    print('testing the loop')
-    print(duration)
-    print(distance)
+    def get_dist(self):
+        while (self.go):
+            if (arduinoSerialData.inWaiting()>0):
+                myData = arduinoSerialData.readline()
+                print(myData.decode())
+                if(float(myData.decode()) < 5):
+                    #turn right one second
+                else:
+                    #keep going same direction
