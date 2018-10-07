@@ -24,66 +24,6 @@ CORS(app)
 # research slave connection!
 arduino_slave = ArduinoSlave('/dev/ttyACM0')
 
-# Init vars for distance sensing
-
-
-
-# Sensor set up
-# arduino.pinMode(TrigPin,arduino.OUTPUT)
-# arduino.pinMode(EchoPin,arduino.INPUT)
-
-# Move the sensor forwards
-# def sensor_distance():
-
-#     # For automatic mode
-#     messages = SSEClient('http://192.168.1.83/my_event_source')
-
-#     arduino.digitalWrite(Motor1A,arduino.LOW)
-#     arduino.digitalWrite(Motor2A,arduino.LOW)
-#     arduino.digitalWrite(Motor1B,arduino.LOW)
-#     arduino.digitalWrite(Motor2B,arduino.LOW)
-#     # forwardsarrow.forwards()
-#     count = 0
-
-#     for msg in messages:
-#         print('automatic message?')
-#         print(msg)
-#         messageString = str(msg)
-
-#         if float(messageString) < 16:
-#             # Move Right
-#             arduino.digitalWrite(Motor1A,arduino.LOW)
-#             arduino.digitalWrite(Motor1B,arduino.HIGH)
-#             arduino.digitalWrite(Motor2A,arduino.HIGH)
-#             arduino.digitalWrite(Motor2B,arduino.LOW)
-#             gevent.sleep(0.2)
-#             yield 'data: %s\n\n' % msg
-#             count += 1
-
-#         else:
-#             # Forwards
-#             arduino.digitalWrite(Motor1A,arduino.HIGH)
-#             arduino.digitalWrite(Motor1B,arduino.LOW)
-#             arduino.digitalWrite(Motor2A,arduino.HIGH)
-#             arduino.digitalWrite(Motor2B,arduino.LOW)
-#             gevent.sleep(0.2)
-#             yield 'data: %s\n\n' % msg
-#             count += 1
-
-
-# def event_end():
-#     count = 0
-#     while True:
-#         gevent.sleep(0.1)
-#         yield 'data: %s\n\n' % count
-#         count = 0
-
-# @app.route('/distance')
-# def sse_sensor_distance():
-#     return Response(
-#             sensor_distance(),
-#             mimetype='text/event-stream')
-
 @app.route('/my_event_source')
 def sse_request():
     return Response(

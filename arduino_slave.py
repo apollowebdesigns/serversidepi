@@ -5,6 +5,25 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
 
+connection = SerialManager(device='/dev/ttyACM0')
+
+TrigPin = 9
+EchoPin = 10
+
+a = ArduinoApi(connection=connection)
+
+ultrasonic = Ultrasonic(EchoPin, TrigPin, False, connection=connection)
+
+def startGetDistance():
+    distance = ultrasonic.get_distance()
+    print(distance)
+    # if distance < 5:
+    #     pass
+    # else:
+    #     pass
+    return distance
+    # sleep(0.002)
+
 class ArduinoSlave():
     """Arduino slave construction setup"""
     Motor1A = 2
@@ -16,20 +35,15 @@ class ArduinoSlave():
     EchoPin = 10
 
     ultrasonic = ''
-        
-
-    def get_distance(self):
-        distance = self.ultrasonic.get_distance()
-        return str(distance)
+    distance = 0
 
     def __init__(self, connection_path):
         try:
             connection = SerialManager(connection_path)
             self.arduino = ArduinoApi(connection = connection)
+            self.ultrasonic = Ultrasonic(EchoPin, TrigPin, False, connection=connection)
         except:
             print("Failed to connect to the arduino")
-
-        self.ultrasonic = Ultrasonic(self.EchoPin, self.TrigPin, False, connection=connection)
 
         # Motors set up
         self.arduino.pinMode(self.Motor1A,self.arduino.OUTPUT)
@@ -40,6 +54,17 @@ class ArduinoSlave():
         # Sensor set up
         self.arduino.pinMode(self.TrigPin,self.arduino.OUTPUT)
         self.arduino.pinMode(self.EchoPin,self.arduino.INPUT)
+
+    def startGetDistance(self):
+        self.distance = self.ultrasonic.get_distance()
+        print(self.distance)
+        # if distance < 5:
+        #     pass
+        # else:
+        #     pass
+        return self.distance
+        # sleep(0.002)
+
 
     def kill_motors(self):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
@@ -63,7 +88,7 @@ class ArduinoSlave():
             
             # distance test when moving forwards
             try:
-                distance = self.get_distance()
+                distance = self.startGetDistance()
                 yield 'data: ' + distance + '\n\n'
             except:
                 yield 'data: there was an error!\n\n'
@@ -83,7 +108,7 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
             try:
-                distance = self.get_distance()
+                distance = self.startGetDistance()
                 yield 'data: ' + distance + '\n\n'
             except:
                 yield 'data: there was an error!\n\n'
