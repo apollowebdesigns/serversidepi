@@ -5,25 +5,6 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
 
-connection = SerialManager(device='/dev/ttyACM0')
-
-TrigPin = 9
-EchoPin = 10
-
-a = ArduinoApi(connection=connection)
-
-ultrasonic = Ultrasonic(EchoPin, TrigPin, False, connection=connection)
-
-def startGetDistance():
-    distance = ultrasonic.get_distance()
-    print(distance)
-    # if distance < 5:
-    #     pass
-    # else:
-    #     pass
-    return distance
-    # sleep(0.002)
-
 class ArduinoSlave():
     """Arduino slave construction setup"""
     Motor1A = 2
