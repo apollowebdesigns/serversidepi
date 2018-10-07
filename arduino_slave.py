@@ -22,7 +22,7 @@ class ArduinoSlave():
         try:
             connection = SerialManager(connection_path)
             self.arduino = ArduinoApi(connection = connection)
-            self.ultrasonic = Ultrasonic(EchoPin, TrigPin, False, connection=connection)
+            self.ultrasonic = Ultrasonic(self.EchoPin, self.TrigPin, False, connection=connection)
         except:
             print("Failed to connect to the arduino")
 
