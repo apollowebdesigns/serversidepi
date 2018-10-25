@@ -75,6 +75,10 @@ $(document).ready(
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
 
-            $('#distance').click(() => http('/distance'))
-            $('#manual').click(() => http('/manual'))
+            $('#distance').click(() => {
+                return http('/distance')
+            })
+            $('#manual').click(() => {
+                return http('/manual')
+            })
         })
