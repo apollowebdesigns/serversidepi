@@ -82,7 +82,8 @@ class ArduinoSlave():
             # distance test when moving forwards
             try:
                 distance = self.startGetDistance()
-                yield 'data: ' + distance + '\n\n'
+                print('distance retrieved successfully')
+                yield 'data: %s\n\n' % str(distance)
             except:
                 yield 'data: there was an error!\n\n'
             count += 1
@@ -102,7 +103,7 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
             try:
                 distance = self.startGetDistance()
-                yield 'data: ' + distance + '\n\n'
+                yield 'data: %s\n\n' % str(distance)
             except:
                 yield 'data: there was an error!\n\n'
             count += 1
