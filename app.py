@@ -33,7 +33,7 @@ def sse_distance():
     return {}
 
 @app.route('/manual')
-def sse_distance():
+def sse_manual():
     arduino_slave.automatic_mode = False
     return {}
 
