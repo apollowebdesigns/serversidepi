@@ -67,4 +67,6 @@ $(document).ready(
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
+
+            $('#distance').mouseup(stopRequest).mousedown(() => eventSourceCreator('/distance'))
         })

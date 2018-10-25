@@ -47,6 +47,18 @@ class ArduinoSlave():
         # sleep(0.002)
 
 
+    def dists(self):
+        count = 0
+        while True:
+            # distance test when moving forwards
+            try:
+                distance = self.startGetDistance()
+                yield 'data: ' + distance + '\n\n'
+            except:
+                yield 'data: there was an error!\n\n'
+            count += 1
+
+
     def kill_motors(self):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)

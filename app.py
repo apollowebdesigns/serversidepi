@@ -24,6 +24,13 @@ CORS(app)
 # research slave connection!
 arduino_slave = ArduinoSlave('/dev/ttyACM0')
 
+@app.route('/distance')
+def sse_request():
+    return Response(
+            arduino_slave.dists(),
+            mimetype='text/event-stream')
+
+
 @app.route('/my_event_source')
 def sse_request():
     return Response(
