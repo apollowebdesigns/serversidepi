@@ -25,7 +25,7 @@ CORS(app)
 arduino_slave = ArduinoSlave('/dev/ttyACM0')
 
 @app.route('/distance')
-def sse_request():
+def sse_distance():
     return Response(
             arduino_slave.dists(),
             mimetype='text/event-stream')
