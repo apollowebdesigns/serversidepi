@@ -120,7 +120,11 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
-            yield 'data: %s\n\n' % count
+            try:
+                distance = self.startGetDistance()
+                yield 'data: %s\n\n' % str(distance)
+            except:
+                yield 'data: there was an error!\n\n'
             count += 1
 
     def move_left(self):
@@ -135,5 +139,9 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
-            yield 'data: %s\n\n' % count
+            try:
+                distance = self.startGetDistance()
+                yield 'data: %s\n\n' % str(distance)
+            except:
+                yield 'data: there was an error!\n\n'
             count += 1
