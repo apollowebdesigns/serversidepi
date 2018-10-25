@@ -27,7 +27,7 @@ arduino_slave = ArduinoSlave('/dev/ttyACM0')
 @app.route('/distance')
 def sse_distance():
     arduino_slave.automatic_mode = True
-    while arduino_slave.automatic_mode == True
+    while arduino_slave.automatic_mode == True:
         arduino_slave.startGetDistance()
         sleep(0.002)
     return {}
