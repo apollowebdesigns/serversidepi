@@ -9,6 +9,13 @@ $(document).ready(
         function() {
             var sse, sse1, sseUltrasonic;
 
+            function http(endpoint){
+                return $.get(endpoint, function(data) {
+                    console.log('ending');
+                    $( ".result" ).html( data );
+                });
+            }
+
             function stopRequest(){
                 sse.close();
                 $.get( "/end_motor_source", function(data) {
@@ -68,6 +75,6 @@ $(document).ready(
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
 
-            $('#distance').click(() => eventSourceCreator('/distance'))
-            $('#manual').click(() => eventSourceCreator('/manual'))
+            $('#distance').click(() => http('/distance'))
+            $('#manual').click(() => http('/manual'))
         })
