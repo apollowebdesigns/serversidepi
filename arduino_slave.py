@@ -18,6 +18,8 @@ class ArduinoSlave():
     ultrasonic = ''
     distance = 0
 
+    automatic_mode = False
+
     def __init__(self, connection_path):
         try:
             connection = SerialManager(connection_path)

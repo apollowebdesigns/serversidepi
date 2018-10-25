@@ -26,9 +26,16 @@ arduino_slave = ArduinoSlave('/dev/ttyACM0')
 
 @app.route('/distance')
 def sse_distance():
-    return Response(
-            arduino_slave.dists(),
-            mimetype='text/event-stream')
+    arduino_slave.automatic_mode = True
+    while arduino_slave.automatic_mode == True
+        arduino_slave.startGetDistance()
+        sleep(0.002)
+    return {}
+
+@app.route('/manual')
+def sse_distance():
+    arduino_slave.automatic_mode = False
+    return {}
 
 
 @app.route('/my_event_source')
