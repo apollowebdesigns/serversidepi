@@ -76,7 +76,7 @@ $(document).ready(
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
 
             $('#distance').click(() => {
-                return $.get('/distance', (data, status) {
+                return $.get('/distance', (data, status) => {
                     console.log('distance hit');
                     console.log(data);
                     console.log(status);

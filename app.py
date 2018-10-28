@@ -41,9 +41,9 @@ def sse_manual():
 
 
 @app.route('/my_event_source')
-def sse_request():
+def sse_forwards():
     return Response(
-            arduino_slave.event_stream(),
+            arduino_slave.move_forwards(),
             mimetype='text/event-stream')
 
 @app.route('/backwards')

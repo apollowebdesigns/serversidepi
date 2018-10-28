@@ -67,7 +67,7 @@ class ArduinoSlave():
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
 
-    def event_stream(self):
+    def move_forwards(self):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
