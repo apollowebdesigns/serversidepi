@@ -45,7 +45,7 @@ class ArduinoSlave():
         #     pass
         # else:
         #     pass
-        return self.distance
+        return float(self.distance)
         # sleep(0.002)
 
 
