@@ -27,7 +27,9 @@ arduino_slave = ArduinoSlave('/dev/ttyACM0')
 @app.route('/distance')
 def sse_distance():
     arduino_slave.automatic_mode = True
+    print('the endpoint has been called')
     while arduino_slave.automatic_mode == True:
+        print('it is true inside the endpoint')
         arduino_slave.startGetDistance()
         sleep(0.002)
     return {}
