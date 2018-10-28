@@ -28,15 +28,16 @@ arduino_slave = ArduinoSlave('/dev/ttyACM0')
 def sse_distance():
     arduino_slave.automatic_mode = True
     print('the endpoint has been called')
-    while arduino_slave.automatic_mode == True:
+    while arduino_slave.automatic_mode:
         print('it is true inside the endpoint')
-        arduino_slave.startGetDistance()
+        arduino_slave.automatic_control()
         sleep(0.002)
     return {}
 
 @app.route('/manual')
 def sse_manual():
     arduino_slave.automatic_mode = False
+    arduino_slave.kill_motors()
     return {}
 
 

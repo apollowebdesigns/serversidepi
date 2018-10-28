@@ -48,6 +48,19 @@ class ArduinoSlave():
         return float(self.distance)
         # sleep(0.002)
 
+    def automatic_control(self):
+        if(self.startGetDistance() < 5):
+            self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
+            self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
+            self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
+            self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
+        else:
+            self.arduino.digitalWrite(self.Motor1A,self.arduino.HIGH)
+            self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
+            self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
+            self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
+
+
 
     def dists(self):
         count = 0
