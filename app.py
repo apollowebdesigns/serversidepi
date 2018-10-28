@@ -40,7 +40,7 @@ def sse_manual():
     return {}
 
 
-@app.route('/my_event_source')
+@app.route('/forwards')
 def sse_forwards():
     return Response(
             arduino_slave.move_forwards(),

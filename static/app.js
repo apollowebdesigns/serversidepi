@@ -54,7 +54,7 @@ $(document).ready(
 
             function ultrasonicSourceCreator(){
                 console.log('inside ultrasonic')
-                sseUltrasonic = new EventSource('http://192.168.1.83/my_event_source');
+                sseUltrasonic = new EventSource('http://192.168.1.83/forwards');
                 sseUltrasonic.onmessage = function(message) {
                     console.log('ultrasonic message here');
                     if (parseInt(message.data) < 8) {
@@ -63,14 +63,14 @@ $(document).ready(
                         stopRequest();
                         eventSourceCreator('/right')
                     }   else {
-                        eventSourceCreator('/my_event_source')
+                        eventSourceCreator('/forwards')
                         $('#output').append('<li>'+message.data+'</li>');
                     }
                 }
             }
 
             $('#stop').mouseup(stopRequest)
-            $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/my_event_source'))
+            $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/forwards'))
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
