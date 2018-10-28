@@ -54,6 +54,7 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor1B,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2A,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
+            sleep(0.5)
         else:
             self.arduino.digitalWrite(self.Motor1A,self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
