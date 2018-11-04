@@ -2,6 +2,31 @@
 
 Uses nanpy to control motors with a slave arduino
 
+## Starting up the application
+
+Use cron to run the application via startapp.py
+```
+...
+...
+@reboot /home/pi/Documents/serversidepi/app.py >/home/pi/logs/pythonlog 2>&1
+```
+
+## Starting the camera
+
+Create a file in
+```
+/etc/init.d
+```
+
+For example
+```
+/etc/init.d/superscript
+```
+
+place the startup of the camera inside the superscript e.g.
+```
+sh /home/pi/Documents/RPi_Cam_Web_Interface/start.sh >/home/pi/logs/cameralog 2>&1
+```
 ## Logging in with MySQL
 
 use command 
