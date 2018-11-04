@@ -27,6 +27,13 @@ place the startup of the camera inside the superscript e.g.
 ```
 sh /home/pi/Documents/RPi_Cam_Web_Interface/start.sh >/home/pi/logs/cameralog 2>&1
 ```
+
+## Use python with git
+
+A cool toy!
+
+[GitPython](https://github.com/gitpython-developers/GitPython)
+
 ## Logging in with MySQL
 
 use command 
