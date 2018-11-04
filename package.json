@@ -1,0 +1,19 @@
+{
+  "name": "serversidepi",
+  "version": "1.0.0",
+  "description": "Uses nanpy to control motors with a slave arduino",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apollowebdesigns/serversidepi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apollowebdesigns/serversidepi/issues"
+  },
+  "homepage": "https://github.com/apollowebdesigns/serversidepi#readme"
+}
