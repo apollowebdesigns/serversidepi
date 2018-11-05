@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/apollowebdesigns/serversidepi#readme",
   "dependencies": {
+    "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",
     "materialize-css": "^1.0.0",
     "vue": "^2.5.17"
