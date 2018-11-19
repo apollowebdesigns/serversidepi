@@ -6,15 +6,15 @@ from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
 from flask import Flask, request, Response, render_template
 from flask_cors import CORS
-# from sense_hat import SenseHat
+from sense_hat import SenseHat
 # from sseclient import SSEClient
 from arduino_slave import ArduinoSlave
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
 
-# import forwardsarrow
-# import backwardsarrow
+import forwardsarrow
+import backwardsarrow
 
 app = Flask(__name__)
 
@@ -43,6 +43,7 @@ def sse_manual():
 
 @app.route('/forwards')
 def sse_forwards():
+    backwardsarrow.backwards
     return Response(
             arduino_slave.move_forwards(),
             mimetype='text/event-stream')
@@ -69,8 +70,8 @@ def sse_left():
 def event_end():
     arduino_slave.kill_motors()
     logging.debug('hit?')
-    # sense = SenseHat()
-    # sense.clear()
+    sense = SenseHat()
+    sense.clear()
     print('entered!!')
     return 'end'
 
