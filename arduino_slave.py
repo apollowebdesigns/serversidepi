@@ -5,6 +5,7 @@ gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
 import forwardsarrow
+import backwardsarrow
 
 class ArduinoSlave():
     """Arduino slave construction setup"""
@@ -110,7 +111,7 @@ class ArduinoSlave():
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
-        # backwardsarrow.backwards()
+        backwardsarrow.backwards()
         count = 0
         while True:
             gevent.sleep(0.01)
