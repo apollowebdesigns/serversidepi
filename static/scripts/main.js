@@ -1,8 +1,10 @@
-angular
+(function() {
+  angular
     .module('app', ['ngTouch']);
+})();
 
-
-angular
+(function() {
+  angular
   .module('app')
   .controller('AppController', AppController);
 
@@ -11,3 +13,5 @@ function AppController() {
 
   vm.test = 'test I have been rendered';
 }
+
+})();
