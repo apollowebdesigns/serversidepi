@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     </head>
 
-    <body class="container">
+    <body class="container" id="app-5">
 
         <h2 class="heading">Demo</h2>
         <button class="btn waves-effect waves-light" id="forwards">Forwards</button>
@@ -39,7 +39,7 @@
         </div>
         <h2>Testing this works with touch!</h2>
         <div>
-            <v-touch @swipeleft="doSomething" :swipe-options="{ threshold: 200 }">
+            <v-touch @press="test" @pressup="" :swipe-options="{ threshold: 200 }">
               <p>I can now be swiped on!</p>
             </v-touch>
             <v-touch @rotate="rotateAThing" :rotate-options="{ pointers: 3 }">
@@ -47,7 +47,6 @@
             </v-touch>
           </div>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/hammerjs/hammer.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/inittouch.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/init.js') }}"></script>
