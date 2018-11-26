@@ -4,6 +4,25 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/hammerjs/hammer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/jquery/dist/jquery.min.js') }}"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/init.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue/dist/vue.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue-touch/dist/vue-touch.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118050144-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-118050144-1');
+        </script>
     </head>
 
     <body class="container" id="app-5">
@@ -49,24 +68,6 @@
               <p>Rotate me!</p>
             </v-touch>
           </div>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/hammerjs/hammer.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/jquery/dist/jquery.min.js') }}"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/init.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue/dist/vue.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue-touch/dist/vue-touch.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118050144-1"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-118050144-1');
-        </script>
     </body>
 
 </html>
