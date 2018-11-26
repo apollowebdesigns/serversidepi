@@ -32,6 +32,15 @@ var app5 = new Vue({
   methods: {
     reverseMessage: function () {
       this.message = this.message.split('').reverse().join('')
+    },
+    press: function () {
+      this.message = this.message.split('').reverse().join('')
+    },
+    mockAlert: function (event) {
+      // `this` inside methods point to the Vue instance
+      alert('Hello ' + this.name + '!')
+      // `event` is the native DOM event
+      alert(event.target.tagName)
     }
   }
 })

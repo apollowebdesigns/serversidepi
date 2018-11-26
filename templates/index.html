@@ -39,8 +39,11 @@
         </div>
         <h2>Testing this works with touch!</h2>
         <div>
-            <v-touch @press="test" @pressup="" :swipe-options="{ threshold: 200 }">
-              <p>I can now be swiped on!</p>
+            <v-touch @press="reverseMessage" @pressup="pressupFunction" :swipe-options="{ threshold: 200 }">
+                <button>Reverse this message</button>
+            </v-touch>
+            <v-touch @press="mockAlert" @pressup="pressupFunction" :swipe-options="{ threshold: 200 }">
+              <button>Create a mock alert!</button>
             </v-touch>
             <v-touch @rotate="rotateAThing" :rotate-options="{ pointers: 3 }">
               <p>Rotate me!</p>
