@@ -4,14 +4,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/hammerjs/hammer.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/init.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue/dist/vue.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue-touch/dist/vue-touch.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/angular/angular.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/angular-touch/angular-touch.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -25,7 +23,7 @@
         </script>
     </head>
 
-    <body class="container" id="app-5">
+    <body class="container" ng-app="app" ng-controller="AppController as appCtrl">
 
         <h2 class="heading">Demo</h2>
         <button class="btn waves-effect waves-light" id="forwards">Forwards</button>
@@ -49,25 +47,8 @@
 
                 </ul>
             </div>
+            <h1>{{appCtrl.test}}</h1>
         </div>
-        <div id="example-1">
-            <button class="btn waves-effect waves-light" v-on:click="counter += 1">Add 1</button>
-            <p>The button above has been clicked {{ counter }} times.</p>
-            <button class="btn waves-effect waves-light" v-on:click="console.log('hello')">Hello</button>
-            <p>The test should look cool {{ test }}</p>
-        </div>
-        <h2>Testing this works with touch!</h2>
-        <div>
-            <v-touch @press="reverseMessage" @pressup="pressupFunction" :swipe-options="{ threshold: 200 }">
-                <button>Reverse this message</button>
-            </v-touch>
-            <v-touch @press="mockAlert" @pressup="pressupFunction" :swipe-options="{ threshold: 200 }">
-              <button>Create a mock alert!</button>
-            </v-touch>
-            <v-touch @rotate="rotateAThing" :rotate-options="{ pointers: 3 }">
-              <p>Rotate me!</p>
-            </v-touch>
-          </div>
     </body>
 
 </html>
