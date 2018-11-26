@@ -37,6 +37,15 @@
             <button class="btn waves-effect waves-light" v-on:click="console.log('hello')">Hello</button>
             <p>The test should look cool {{ test }}</p>
         </div>
+        <h2>Testing this works with touch!</h2>
+        <div>
+            <v-touch @swipeleft="doSomething" :swipe-options="{ threshold: 200 }">
+              <p>I can now be swiped on!</p>
+            </v-touch>
+            <v-touch @rotate="rotateAThing" :rotate-options="{ pointers: 3 }">
+              <p>Rotate me!</p>
+            </v-touch>
+          </div>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/hammerjs/hammer.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/inittouch.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/jquery/dist/jquery.min.js') }}"></script>
@@ -44,6 +53,7 @@
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/init.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue/dist/vue.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/vue-touch/dist/vue-touch.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
