@@ -1,7 +1,4 @@
-var hammertime = new Hammer(myElement, myOptions);
-hammertime.on('pan', function(ev) {
-	console.log(ev);
-});
+
 
 function killRequest() {
     return $.get( "/end_motor_source", function(data) {
@@ -79,6 +76,9 @@ $(document).ready(
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
+
+            var myElement = document.getElementById('forwards');
+            var hammertime = new Hammer(myElement);
 
             hammertime.on('press', () => eventSourceCreator('/forwards'));
             hammertime.on('pressup', () => engageManualMode());
