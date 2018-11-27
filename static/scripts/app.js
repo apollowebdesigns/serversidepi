@@ -77,11 +77,21 @@ $(document).ready(
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
 
-            var myElement = document.getElementById('forwards');
-            var hammertime = new Hammer(myElement);
+            function createTouchElement(direction) {
+                var myElement = document.getElementById(direction);
+                var hammertime = new Hammer(myElement);
 
-            hammertime.on('press', () => eventSourceCreator('/forwards'));
-            hammertime.on('pressup', () => engageManualMode());
+                hammertime.on('press', () => eventSourceCreator('/' + direction));
+                hammertime.on('pressup', stopRequest);
+
+                return {
+                    direction: direction,
+                    touchElement: hammertime
+                }
+            }
+
+            var directions = ['forwards', 'backwards', 'left', 'right'];
+            var touchElements = directions.map(createTouchElement);
 
             $('#distance').click(() => {
                 return $.get('/distance', (data, status) => {
