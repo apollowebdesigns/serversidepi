@@ -76,6 +76,20 @@ $(document).ready(
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
             $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
+            $('#distance').click(() => {
+                return $.get('/distance', (data, status) => {
+                    console.log('distance hit');
+                    console.log(data);
+                    console.log(status);
+                })
+            })
+            $('#manual').click(() => {
+                return $.get('/manual', (data, status) => {
+                    console.log('manual, now stopping');
+                    console.log(data);
+                    console.log(status);
+                })
+            })
 
             function createTouchElement(direction) {
                 var myElement = document.getElementById(direction);
@@ -92,15 +106,4 @@ $(document).ready(
 
             var directions = ['forwards', 'backwards', 'left', 'right'];
             var touchElements = directions.map(createTouchElement);
-
-            $('#distance').click(() => {
-                return $.get('/distance', (data, status) => {
-                    console.log('distance hit');
-                    console.log(data);
-                    console.log(status);
-                })
-            })
-            $('#manual').click(() => {
-                return http('/manual')
-            })
         })
