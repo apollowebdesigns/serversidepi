@@ -4,7 +4,7 @@ from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager)
 from time import sleep
-from flask import Flask, request, Response, render_template
+from flask import Flask, request, Response, render_template, json
 from flask_cors import CORS
 from sense_hat import SenseHat
 # from sseclient import SSEClient
@@ -78,7 +78,11 @@ def event_end():
 
 @app.route('/get_pi_temp')
 def get_temperature_of_pi():
-    return str(measure_temp())
+    data = measure_temp()
+    response = app.response_class(response=json.dumps(data),
+                                  status=200,
+                                  mimetype='application/json')
+    return response
 
 @app.route('/')
 def page():

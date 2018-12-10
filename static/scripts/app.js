@@ -7,9 +7,9 @@ function killRequest() {
                 });
 }
 
-function getPiTemperature(result) {
-    return $.get('/get_pi_temp').then(function(res) {
-        return result = res;
+function getPiTemperature() {
+    return $.get('/get_pi_temp').then(function(piTemperature) {
+        return $('#piTemperature').html(piTemperature);
     });
 }
 
@@ -19,7 +19,7 @@ $(document).ready(
 
             let piTemperature;
 
-            getPiTemperature(piTemperature);
+            getPiTemperature() ;
 
             function http(endpoint){
                 return $.get(endpoint, function(data) {
@@ -116,5 +116,4 @@ $(document).ready(
 
             var directions = ['forwards', 'backwards', 'left', 'right'];
             var touchElements = directions.map(createTouchElement);
-            $('#result').html(piTemperature);
         })
