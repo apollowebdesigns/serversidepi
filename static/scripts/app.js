@@ -119,4 +119,6 @@ $(document).ready(
 
             var directions = ['forwards', 'backwards', 'left', 'right'];
             var touchElements = directions.map(createTouchElement);
+            console.log('what is the gauge');
+            console.log(Gauge);
         })
