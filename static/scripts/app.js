@@ -7,9 +7,19 @@ function killRequest() {
                 });
 }
 
+function getPiTemperature(result) {
+    return $.get('/get_pi_temp').then(function(res) {
+        return result = res;
+    });
+}
+
 $(document).ready(
         function() {
             var sse, sse1, sseUltrasonic;
+
+            let piTemperature;
+
+            getPiTemperature(piTemperature);
 
             function http(endpoint){
                 return $.get(endpoint, function(data) {
@@ -106,4 +116,5 @@ $(document).ready(
 
             var directions = ['forwards', 'backwards', 'left', 'right'];
             var touchElements = directions.map(createTouchElement);
+            $('#result').html(piTemperature);
         })

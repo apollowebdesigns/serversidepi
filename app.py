@@ -9,6 +9,7 @@ from flask_cors import CORS
 from sense_hat import SenseHat
 # from sseclient import SSEClient
 from arduino_slave import ArduinoSlave
+from pitemp import measure_temp
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
@@ -74,6 +75,10 @@ def event_end():
     sense.clear()
     print('entered!!')
     return 'end'
+
+@app.route('/get_pi_temp')
+def get_temperature_of_pi():
+    return str(measure_temp())
 
 @app.route('/')
 def page():
