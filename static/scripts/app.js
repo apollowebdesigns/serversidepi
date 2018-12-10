@@ -10,6 +10,9 @@ function killRequest() {
 function getPiTemperature() {
     return $.get('/get_pi_temp').then(function(piTemperature) {
         return $('#piTemperature').html(piTemperature);
+    }).catch(error => {
+        console.error('an error happened');
+        console.error(error);
     });
 }
 
