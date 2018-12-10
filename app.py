@@ -79,7 +79,7 @@ def event_end():
 @app.route('/get_pi_temp')
 def get_temperature_of_pi():
     data = measure_temp()
-    response = app.response_class(response=data,
+    response = app.response_class(response=json.dumps(data),
                                   status=200,
                                   mimetype='application/json')
     return response
