@@ -16,13 +16,13 @@ def get_sensor_data(sense):
         temp = sense.get_temperature()
         humidity = sense.get_humidity()
         return {
-                pitch: pitch,
-                roll: roll,
-                yaw: yaw,
-                pressure: pressure,
-                temp: temp,
-                humidity: humidity,
-                accelleration: accelleration
+                "pitch": pitch,
+                "roll": roll,
+                "yaw": yaw,
+                "pressure": pressure,
+                "temp": temp,
+                "humidity": humidity,
+                "accelleration": accelleration
         }
 
 def get_all_data(sense):
