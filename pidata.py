@@ -12,6 +12,7 @@ def measure_temp():
 
 def get_sensor_data():
         sense.clear()
+        accelleration = sense.get_accelerometer_raw()
         o = sense.get_orientation()
         pitch = o["pitch"]
         roll = o["roll"]
@@ -25,7 +26,8 @@ def get_sensor_data():
                 yaw: yaw,
                 pressure: pressure,
                 temp: temp,
-                humidity: humidity
+                humidity: humidity,
+                accelleration: accelleration
         }
 
 def get_all_data():
