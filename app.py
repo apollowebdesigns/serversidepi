@@ -9,7 +9,7 @@ from flask_cors import CORS
 from sense_hat import SenseHat
 # from sseclient import SSEClient
 from arduino_slave import ArduinoSlave
-from pitemp import measure_temp
+from pidata import get_all_data
 import logging
 logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
 
@@ -78,7 +78,7 @@ def event_end():
 
 @app.route('/get_pi_temp')
 def get_temperature_of_pi():
-    data = measure_temp()
+    data = get_all_data()
     response = app.response_class(response=json.dumps(data),
                                   status=200,
                                   mimetype='application/json')
