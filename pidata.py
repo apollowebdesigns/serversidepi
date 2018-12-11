@@ -1,8 +1,4 @@
 import os
-from sense_hat import SenseHat
-
-sense = SenseHat()
-sense.clear()
 
 def measure_temp():
         temp = os.popen("vcgencmd measure_temp").readline()
@@ -10,8 +6,7 @@ def measure_temp():
         temp = temp.replace("temp=","")
         return float(temp)
 
-def get_sensor_data():
-        sense.clear()
+def get_sensor_data(sense):
         accelleration = sense.get_accelerometer_raw()
         o = sense.get_orientation()
         pitch = o["pitch"]
@@ -30,7 +25,7 @@ def get_sensor_data():
                 accelleration: accelleration
         }
 
-def get_all_data():
-        all_data = get_sensor_data()
+def get_all_data(sense):
+        all_data = get_sensor_data(sense)
         all_data['pitemp'] = measure_temp()
         return all_data
