@@ -79,6 +79,8 @@ def event_end():
 
 @app.route('/get_pi_temp')
 def get_temperature_of_pi():
+    sense = SenseHat()
+    sense.clear()
     data = get_all_data(sense)
     response = app.response_class(response=json.dumps(data),
                                   status=200,
