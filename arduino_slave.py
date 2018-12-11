@@ -4,8 +4,10 @@ from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
 from nanpy import (ArduinoApi, SerialManager, Ultrasonic)
 from time import sleep
-import forwardsarrow
-import backwardsarrow
+from pidata import get_all_data 
+import json
+# import forwardsarrow
+# import backwardsarrow
 
 class ArduinoSlave():
     """Arduino slave construction setup"""
@@ -47,6 +49,7 @@ class ArduinoSlave():
         #     pass
         # else:
         #     pass
+
         return float(self.distance)
         # sleep(0.002)
 
@@ -83,12 +86,12 @@ class ArduinoSlave():
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
 
-    def move_forwards(self):
+    def move_forwards(self, sense):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
-        forwardsarrow.forwards()
+        # forwardsarrow.forwards()
         count = 0
         while True:
             gevent.sleep(0.01)
@@ -101,17 +104,19 @@ class ArduinoSlave():
             try:
                 distance = self.startGetDistance()
                 print('distance retrieved successfully')
-                yield 'data: %s\n\n' % str(distance)
+                raw_data = get_all_data(sense)
+                raw_data['distance'] = distance
+                yield 'data: %s\n\n' % json.dumps(raw_data)
             except:
                 yield 'data: there was an error!\n\n'
             count += 1
 
-    def move_backwards(self):
+    def move_backwards(self, sense):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
-        backwardsarrow.backwards()
+        # backwardsarrow.backwards()
         count = 0
         while True:
             gevent.sleep(0.01)
@@ -121,12 +126,14 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
             try:
                 distance = self.startGetDistance()
-                yield 'data: %s\n\n' % str(distance)
+                raw_data = get_all_data(sense)
+                raw_data['distance'] = distance
+                yield 'data: %s\n\n' % json.dumps(raw_data)
             except:
                 yield 'data: there was an error!\n\n'
             count += 1
 
-    def move_right(self):
+    def move_right(self, sense):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
@@ -140,12 +147,14 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor2B,self.arduino.LOW)
             try:
                 distance = self.startGetDistance()
-                yield 'data: %s\n\n' % str(distance)
+                raw_data = get_all_data(sense)
+                raw_data['distance'] = distance
+                yield 'data: %s\n\n' % json.dumps(raw_data)
             except:
                 yield 'data: there was an error!\n\n'
             count += 1
 
-    def move_left(self):
+    def move_left(self, sense):
         self.arduino.digitalWrite(self.Motor1A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
         self.arduino.digitalWrite(self.Motor1B,self.arduino.LOW)
@@ -158,8 +167,10 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor2A,self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2B,self.arduino.HIGH)
             try:
+                raw_data = get_all_data(sense)
                 distance = self.startGetDistance()
-                yield 'data: %s\n\n' % str(distance)
+                raw_data['distance'] = distance
+                yield 'data: %s\n\n' % json.dumps(raw_data)
             except:
                 yield 'data: there was an error!\n\n'
             count += 1

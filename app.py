@@ -45,27 +45,35 @@ def sse_manual():
 
 @app.route('/forwards')
 def sse_forwards():
+    sense = SenseHat()
+    sense.clear()
     backwardsarrow.backwards
     return Response(
-            arduino_slave.move_forwards(),
+            arduino_slave.move_forwards(sense),
             mimetype='text/event-stream')
 
 @app.route('/backwards')
 def sse_backwards():
+    sense = SenseHat()
+    sense.clear()
     return Response(
-            arduino_slave.move_backwards(),
+            arduino_slave.move_backwards(sense),
             mimetype='text/event-stream')
 
 @app.route('/right')
 def sse_right():
+    sense = SenseHat()
+    sense.clear()
     return Response(
-            arduino_slave.move_right(),
+            arduino_slave.move_right(sense),
             mimetype='text/event-stream')
 
 @app.route('/left')
 def sse_left():
+    sense = SenseHat()
+    sense.clear()
     return Response(
-            arduino_slave.move_left(),
+            arduino_slave.move_left(sense),
             mimetype='text/event-stream')
 
 @app.route('/end_motor_source')
