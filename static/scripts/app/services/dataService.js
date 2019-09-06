@@ -3,7 +3,7 @@
     .module('app')
     .service('dataService', dataService);
 
-    dataservice.$inject = ['$http'];
+    dataService.$inject = ['$http'];
 
     function dataService($http) {
         this.getEmails = function getEmails() {

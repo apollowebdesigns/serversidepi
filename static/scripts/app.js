@@ -46,7 +46,7 @@ $(document).ready(
                     console.log('A message has arrived!');
                     document.getElementById('output').innerHTML = JSON.stringify(message.data);
                     console.log(message.data);
-                }
+                };
                 sse.onerror = function(err) {
                     console.error('There has been an error!!');
                     document.getElementById('output').innerHTML = JSON.stringify(err);
@@ -58,7 +58,7 @@ $(document).ready(
                 sse.close();
                 $.get( "/end_motor_source", function(data) {
                     console.log('ending');
-                    $( ".result" ).html( data );
+                    $( ".result" ).html(data);
                 });
                 return killRequest();
             }
@@ -68,7 +68,7 @@ $(document).ready(
             }
 
             function ultrasonicSourceCreator(){
-                console.log('inside ultrasonic')
+                console.log('inside ultrasonic');
                 sseUltrasonic = new EventSource('http://192.168.1.83/forwards');
                 sseUltrasonic.onmessage = function(message) {
                     console.log('ultrasonic message here');
@@ -78,31 +78,31 @@ $(document).ready(
                         stopRequest();
                         eventSourceCreator('/right')
                     }   else {
-                        eventSourceCreator('/forwards')
+                        eventSourceCreator('/forwards');
                         $('#output').append('<li>'+message.data+'</li>');
                     }
                 }
             }
 
-            $('#stop').mouseup(stopRequest)
-            $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/forwards'))
-            $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'))
-            $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'))
-            $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'))
+            $('#stop').mouseup(stopRequest);
+            $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/forwards'));
+            $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'));
+            $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'));
+            $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'));
             $('#distance').click(() => {
                 return $.get('/distance', (data, status) => {
                     console.log('distance hit');
                     console.log(data);
                     console.log(status);
                 })
-            })
+            });
             $('#manual').click(() => {
                 return $.get('/manual', (data, status) => {
                     console.log('manual, now stopping');
                     console.log(data);
                     console.log(status);
                 })
-            })
+            });
 
             function createTouchElement(direction) {
                 var myElement = document.getElementById(direction);
@@ -121,4 +121,4 @@ $(document).ready(
             var touchElements = directions.map(createTouchElement);
             console.log('what is the gauge');
             console.log(Gauge);
-        })
+        });
