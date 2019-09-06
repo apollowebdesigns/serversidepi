@@ -84,7 +84,7 @@ $(document).ready(
                 }
             }
 
-            $('#stop').mousedown(stopRequest);
+            $('#stop').onclick(stopRequest);
             $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/forwards'));
             $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'));
             $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'));
