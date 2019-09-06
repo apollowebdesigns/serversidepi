@@ -84,11 +84,17 @@ $(document).ready(
                 }
             }
 
-            $('#stop').onclick(stopRequest);
-            $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/forwards'));
-            $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'));
-            $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'));
-            $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'));
+            $('#stop').click(stopRequest);
+            // $('#forwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/forwards'));
+            // $('#backwards').mouseup(stopRequest).mousedown(() => eventSourceCreator('/backwards'));
+            // $('#right').mouseup(stopRequest).mousedown(() => eventSourceCreator('/right'));
+            // $('#left').mouseup(stopRequest).mousedown(() => eventSourceCreator('/left'));
+
+            // Temp changes put in to remove complex DOM events
+            $('#forwards').click(() => eventSourceCreator('/forwards'));
+            $('#backwards').click(() => eventSourceCreator('/backwards'));
+            $('#right').click(() => eventSourceCreator('/right'));
+            $('#left').click(() => eventSourceCreator('/left'));
             $('#distance').click(() => {
                 return $.get('/distance', (data, status) => {
                     console.log('distance hit');
