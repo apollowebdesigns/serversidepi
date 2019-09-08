@@ -31,7 +31,8 @@ def sse_distance():
     print('the endpoint has been called')
     while arduino_slave.automatic_mode:
         print('it is true inside the endpoint')
-        arduino_slave.automatic_control()
+        dist = arduino_slave.automatic_control()
+        print(dist)
         sleep(0.002)
     return {}
 

@@ -68,6 +68,7 @@ class ArduinoSlave():
             self.arduino.digitalWrite(self.Motor1B, self.arduino.LOW)
             self.arduino.digitalWrite(self.Motor2A, self.arduino.HIGH)
             self.arduino.digitalWrite(self.Motor2B, self.arduino.LOW)
+        return self.startGetDistance()
 
     def dists(self):
         count = 0
