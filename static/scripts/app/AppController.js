@@ -8,18 +8,19 @@
     function AppController($log, serverSentEventService) {
         var vm = this;
         vm.sse = null;
+        vm.sseDataStore = serverSentEventService.sseDataStore;
         vm.eventSourceCreator = eventSourceCreator;
         vm.engageManualMode = engageManualMode;
         vm.killRequest = serverSentEventService.killRequest;
 
         function eventSourceCreator(direction){
-            vm.sse = new EventSource(direction);
-            vm.sse.onmessage = function(message) {
+            vm.sseDataStore[direction] = new EventSource(direction);
+            vm.sseDataStore[direction].onmessage = function(message) {
                 $log.log('A message has arrived!');
                 document.getElementById('output').innerHTML = JSON.stringify(message.data);
                 $log.log(message.data);
             };
-            vm.sse.onerror = function(err) {
+            vm.sseDataStore[direction].onerror = function(err) {
                 $log.error('There has been an error!!');
                 document.getElementById('output').innerHTML = JSON.stringify(err);
                 $log.error(err);
@@ -27,7 +28,9 @@
         }
 
         function engageManualMode() {
-            vm.sse.close();
+            for (direction in vm.sseDataStore) {
+                vm.sseDataStore[direction].close();
+            }
             $.get( "/end_motor_source", function(data) {
                 $log.log('ending');
                 $( ".result" ).html(data);

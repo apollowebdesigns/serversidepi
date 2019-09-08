@@ -6,6 +6,10 @@
     serverSentEventService.$inject = ['$http', '$log'];
 
     function serverSentEventService($http, $log) {
+        this.sseDataStore = {
+
+        };
+
         this.getEmails = function getEmails() {
             return $http.get('/emails');
         };
