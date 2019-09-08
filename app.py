@@ -10,7 +10,10 @@ from sense_hat import SenseHat
 from arduino_slave import ArduinoSlave
 from pidata import get_all_data
 import logging
-logging.basicConfig(filename='/home/pi/error.log',level=logging.DEBUG)
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 
 import forwardsarrow
@@ -28,11 +31,11 @@ arduino_slave = ArduinoSlave('/dev/ttyACM0')
 @app.route('/distance')
 def sse_distance():
     arduino_slave.automatic_mode = True
-    print('the endpoint has been called')
+    logging.info('the endpoint has been called')
     while arduino_slave.automatic_mode:
-        print('it is true inside the endpoint')
+        logging.info('it is true inside the endpoint')
         dist = arduino_slave.automatic_control()
-        print(dist)
+        logging.info(dist)
         sleep(0.002)
     return {}
 

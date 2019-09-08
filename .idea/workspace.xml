@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6af03eb-82ed-4602-8500-957eb6ebe9ac" name="Default Changelist" comment="Added in more files">
-      <change afterPath="$PROJECT_DIR$/install_kibana.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arduino_slave.py" beforeDir="false" afterPath="$PROJECT_DIR$/arduino_slave.py" afterDir="false" />
-    </list>
+    <list default="true" id="c6af03eb-82ed-4602-8500-957eb6ebe9ac" name="Default Changelist" comment="Added in more files" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +84,7 @@
       <workItem from="1567923023512" duration="176000" />
       <workItem from="1567923729207" duration="720000" />
       <workItem from="1567934789356" duration="3051000" />
-      <workItem from="1567944573243" duration="755000" />
+      <workItem from="1567944573243" duration="956000" />
     </task>
     <task id="LOCAL-00001" summary="Added in more files">
       <created>1567787513325</created>
