@@ -9,6 +9,7 @@
         var vm = this;
         vm.sse = null;
         vm.sseDataStore = serverSentEventService.sseDataStore;
+        vm.distance = serverSentEventService.distance;
         vm.eventSourceCreator = eventSourceCreator;
         vm.engageManualMode = engageManualMode;
         vm.killRequest = serverSentEventService.killRequest;
@@ -27,10 +28,14 @@
             }
         }
 
-        function engageManualMode() {
+        function closeSSERequests() {
             for (direction in vm.sseDataStore) {
                 vm.sseDataStore[direction].close();
             }
+        }
+
+        function engageManualMode() {
+            closeSSERequests();
             $.get( "/end_motor_source", function(data) {
                 $log.log('ending');
                 $( ".result" ).html(data);
