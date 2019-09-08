@@ -1,7 +1,7 @@
 import gevent.monkey
 from gevent.pywsgi import WSGIServer
 gevent.monkey.patch_all()
-
+import sys
 from time import sleep
 from flask import Flask, request, Response, render_template
 import json
@@ -11,6 +11,7 @@ from arduino_slave import ArduinoSlave
 from pidata import get_all_data
 import logging
 logging.basicConfig(
+    stream=sys.stdout,
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
