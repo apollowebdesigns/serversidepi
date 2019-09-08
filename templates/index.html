@@ -4,13 +4,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/jquery/dist/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/hammerjs/hammer.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/init.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/angular/angular.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/angular-touch/angular-touch.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/node_modules/d3-speedo-gauge/gauge.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/app.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/AppController.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/services/dataService.js') }}"></script>
@@ -33,7 +31,7 @@
         <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/backwards')">Backwards</button>
         <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/right')">Right</button>
         <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/left')">Left</button>
-        <button class="btn waves-effect waves-light red" ng-click="appCtrl.eventSourceCreator('/left')">stop</button>
+        <button class="btn waves-effect waves-light red" ng-click="appCtrl.killRequest()">stop</button>
 
         <div class="parallax-container valign-wrapper">
             <div class="parallax"><iframe id="camera-screen" frameborder="0" class="iframe"></iframe></div>
@@ -51,7 +49,6 @@
 
                 </ul>
             </div>
-            <h1 ng-bind="appCtrl.test"></h1>
         </div>
         <div id="piTemperature"></div>
     </body>

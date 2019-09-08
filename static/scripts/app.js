@@ -22,7 +22,7 @@ $(document).ready(
 
             let piTemperature;
 
-            getPiTemperature() ;
+            getPiTemperature();
 
             function http(endpoint){
                 return $.get(endpoint, function(data) {
