@@ -14,6 +14,7 @@
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/app.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/AppController.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/services/dataService.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/app/services/serverSentEventService.js') }}"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118050144-1"></script>
         <script>
@@ -28,11 +29,11 @@
     <body class="container" ng-app="app" ng-controller="AppController as appCtrl">
 
         <h2 class="heading">Demo</h2>
-        <button class="btn waves-effect waves-light" id="forwards">Forwards</button>
-        <button class="btn waves-effect waves-light" id="backwards">Backwards</button>
-        <button class="btn waves-effect waves-light" id="right">Right</button>
-        <button class="btn waves-effect waves-light" id="left">Left</button>
-        <button class="btn waves-effect waves-light red" id="left">stop</button>
+        <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/forwards')">Forwards</button>
+        <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/backwards')">Backwards</button>
+        <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/right')">Right</button>
+        <button class="btn waves-effect waves-light" ng-click="appCtrl.eventSourceCreator('/left')">Left</button>
+        <button class="btn waves-effect waves-light red" ng-click="appCtrl.eventSourceCreator('/left')">stop</button>
 
         <div class="parallax-container valign-wrapper">
             <div class="parallax"><iframe id="camera-screen" frameborder="0" class="iframe"></iframe></div>
